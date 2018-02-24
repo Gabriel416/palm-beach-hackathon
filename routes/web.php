@@ -23,6 +23,9 @@ Route::get('/register/class', function () {
     return view('auth/class');
 });
 
+//USER CONTROLLER
+Route::post('/classroom', 'UserController@classroom');
+
 // Pages Controller
 Route::get('/app/{any}', 'PagesController@index')->where('any', '.*');
 

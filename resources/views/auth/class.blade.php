@@ -60,7 +60,7 @@
     <div class="col s m5 card-col register-container-column">
         <div class="card-body">
             <h1>Sigh up as a Teacher!</h1>
-            <form method="POST" action="{{ route('register') }}">
+            <form action="/classroom" method="POST" id="classroom-form">
                 @csrf
 
                 <div class="form-group row">
@@ -122,9 +122,34 @@
                         <input id="about" type="text" class="form-control" name="location" required>
                     </div>
                 </div>
-                
+                <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button  class="waves-effect waves-light btn register">
+                            Register
+                        </button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script
+  <script type="text/javascript">
+    $("#classroom-form").submit(function(event) {
+        event.preventDefault();
+        console.log('form submit');
+        var thisForm = $("#classroom-form").serialize();
+        return false;
+
+        $.post('/classroom', thisForm, function(data) {
+                console.log(data, 'data');
+            })
+            .fail(function(data) {
+                console.log(data, 'fail')
+            });
+    })
+  </script>
+
 @endsection
