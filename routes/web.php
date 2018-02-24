@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/register/stem', function () {
+    return view('auth/register');
+});
+
+Route::get('/register/class', function () {
+    return view('class');
+});
+
 // Pages Controller
 Route::get('/app/{any}', 'PagesController@index')->where('any', '.*');
 

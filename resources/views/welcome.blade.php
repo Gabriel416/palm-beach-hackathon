@@ -79,7 +79,7 @@
                     <div class="card-content white-text">
                         <img class="signup-image" src="/images/Group.png">
                         <p class="description">I'm a Teacher who'd like help from STEM professionals</p>
-                        <a class="waves-effect waves-light btn sign-up">SIGN UP</a>
+                        <a href="/register/class" class="waves-effect waves-light btn sign-up">SIGN UP</a>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                     <div class="card-content white-text">
                         <img  src="/images/stem.png">
                         <p class="description">I'm a STEM Professional who wants to help teachers</p>
-                        <a class="waves-effect waves-light btn sign-up">SIGN UP</a>
+                        <a href="/register/stem" class="waves-effect waves-light btn sign-up">SIGN UP</a>
                     </div>
                 </div>
             </div>
@@ -98,5 +98,5 @@
             <p class="login-instead">Already have an account? Log in</p>
         </div>
     
-        @endsection
+    @endsection
 
