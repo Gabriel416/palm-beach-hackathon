@@ -73,14 +73,13 @@
             <h2 class="subtitle">From seeds of knowledge...they STEM</h2>
         </div>
 
-<<<<<<< HEAD
         <div class="row card-row">
             <div class="col s m4 card-col">
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
                         <img class="signup-image" src="/images/Group.png">
                         <p class="description">I'm a Teacher who'd like help from STEM professionals</p>
-                        <a class="waves-effect waves-light btn sign-up">SIGN UP</a>
+                        <a href="/register/class" class="waves-effect waves-light btn sign-up">SIGN UP</a>
                     </div>
                 </div>
             </div>
@@ -89,33 +88,15 @@
                     <div class="card-content white-text">
                         <img  src="/images/stem.png">
                         <p class="description">I'm a STEM Professional who wants to help teachers</p>
-                        <a class="waves-effect waves-light btn sign-up">SIGN UP</a>
+                        <a href="/register/stem" class="waves-effect waves-light btn sign-up">SIGN UP</a>
                     </div>
-=======
-                <div class="links">
-                    <a href="/test">bye</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
->>>>>>> 5ce30c59e618d54bf65d65f03b722c6c7945f814
-                </div>
-                <div id="app">
-                    <video-chat></video-chat>
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
 
         <div class="row">
             <p class="login-instead">Already have an account? Log in</p>
         </div>
     
-        @endsection
+    @endsection
 
-=======
-        <script src="//media.twiliocdn.com/sdk/js/video/v1/twilio-video.min.js"></script>
-        <script src="{{asset('js/app.js')}}"></script>
-    </body>
-</html>
->>>>>>> 5ce30c59e618d54bf65d65f03b722c6c7945f814
