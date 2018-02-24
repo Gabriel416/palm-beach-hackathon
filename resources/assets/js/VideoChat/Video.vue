@@ -1,6 +1,21 @@
 <template lang="html">
     <section>
         <div style="color: black; font-size: 54px;">VIDEO CHAT WOULD BE HERE</div>
+        <div id="startDiv">
+            <p>Enter Your Name Here:</p>
+            <input id="my-name" 
+                placeholder="your name"/>
+            <button id="start">Let's Do This!</button>
+        </div>
+
+        <div id="callDiv" style="display:none;">
+    <div id="me"></div>
+    <div id="you"></div>
+    <div>
+        <input id="other-name" placeholder="other person's name"/>
+        <button id="call">Video Call This Person</button>
+    </div>
+</div>
     </section>
 </template>
 
