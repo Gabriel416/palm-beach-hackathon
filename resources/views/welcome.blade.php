@@ -1,100 +1,121 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
+        @section('styles')
         <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
+
+            .description {
+                color: black !important;
+                font-size: 16px;
+                font-weight: bold;
+            }
+            
+            .card-content {
+                background-color: white;
+                text-align: center;
+                border-radius: 6px !important;
+                /* height: 250px;
+                width: 350px; */
             }
 
-            .full-height {
-                height: 100vh;
+            .signup-image {
+                height: 71px;
             }
 
-            .flex-center {
-                align-items: center;
+            .sign-up {
+                background-color: #FFB800;
+                font-weight: bold;
+                width: 100%;
+                margin: 20px 0px 10px 0px;
+            }
+
+            .card-col {
+                margin: 0px 10px !important;
+            }
+
+            .card-row {
                 display: flex;
                 justify-content: center;
             }
 
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
+            .login-instead {
                 text-align: center;
+                color: white;
+            }
+
+            .headliner {
+                text-align: center;
+                margin-bottom: 60px;
             }
 
             .title {
-                font-size: 84px;
+                color: white;
+                margin: 0;
             }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
+            
+            .subtitle {
+                color: white;
+                margin: 0;
+                font-size: 16px;
             }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
+            /* .card {
+                height: 250px;
+                width: 350px;
+            } */
         </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
+        @endsection
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+    @section('content')
+        
+        <div class="row headliner">
+            <h1 class="title">seeds</h1>
+            <h2 class="subtitle">From seeds of knowledge...they STEM</h2>
+        </div>
 
+<<<<<<< HEAD
+        <div class="row card-row">
+            <div class="col s m4 card-col">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <img class="signup-image" src="/images/Group.png">
+                        <p class="description">I'm a Teacher who'd like help from STEM professionals</p>
+                        <a class="waves-effect waves-light btn sign-up">SIGN UP</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4 card-col">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <img  src="/images/stem.png">
+                        <p class="description">I'm a STEM Professional who wants to help teachers</p>
+                        <a class="waves-effect waves-light btn sign-up">SIGN UP</a>
+                    </div>
+=======
                 <div class="links">
                     <a href="/test">bye</a>
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
+>>>>>>> 5ce30c59e618d54bf65d65f03b722c6c7945f814
                 </div>
                 <div id="app">
                     <video-chat></video-chat>
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
+
+        <div class="row">
+            <p class="login-instead">Already have an account? Log in</p>
+        </div>
+    
+        @endsection
+
+=======
         <script src="//media.twiliocdn.com/sdk/js/video/v1/twilio-video.min.js"></script>
         <script src="{{asset('js/app.js')}}"></script>
     </body>
 </html>
+>>>>>>> 5ce30c59e618d54bf65d65f03b722c6c7945f814
