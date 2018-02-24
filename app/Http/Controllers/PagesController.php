@@ -12,6 +12,6 @@ class PagesController extends Controller
             'user' => Auth::user(),
         ]);
 
-        return view('welcome');
+        return view('vue');
     }
 }
