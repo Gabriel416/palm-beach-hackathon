@@ -8,7 +8,7 @@ use App\User;
 class Professional extends Model
 {
     protected $fillable = [
-        'linked_in_id', 'work_place', 'bio', 'user_id','job_id'
+        'linked_in_id', 'work_place', 'bio', 'user_id'
     ];
 
     public function user()
@@ -16,9 +16,9 @@ class Professional extends Model
         return $this->hasOne('App\User');
     }
 
-    public function job()
+    public function jobs()
     {
-        return $this->belongsTo('App\Job');
+        return $this->hasMany('App\Job');
     }
     
     public function questions()

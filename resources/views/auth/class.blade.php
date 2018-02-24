@@ -59,7 +59,7 @@
 <div class="row card-row register-container">
     <div class="col s m5 card-col register-container-column">
         <div class="card-body">
-            <h1>Sigh up as STEM Professional!</h1>
+            <h1>Sigh up as a Teacher!</h1>
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
@@ -106,46 +106,23 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="about" class="col-md-4 col-form-label text-md-right">Tell Us About Yourself</label>
+                    <label for="school" class="col-md-4 col-form-label text-md-right">What school do you teach in?</label>
 
                     <div class="col-md-6">
-                        <input id="about" type="text" class="form-control" name="about" required>
+                        <input id="school" type="text" class="form-control" name="school" required>
                     </div>
                 </div>
 
-                <h2>What industry or industries do you have knowledge in?</h2>
+                <input type="hidden" name="role" value="class">
+
+                <div class="form-group row">
+                    <label for="location" class="col-md-4 col-form-label text-md-right">Where is your school located?</label>
+
+                    <div class="col-md-6">
+                        <input id="about" type="text" class="form-control" name="location" required>
+                    </div>
+                </div>
                 
-                <div class="row">
-                    <div class="col s6">
-                        <input name="jobs" class="filled-in" type="checkbox" id="science" />
-                        <label for="science">Science</label>
-                    </div>
-
-                    <div class="col s6">
-                        <input name="jobs" class="filled-in" type="checkbox" id="technology" />
-                        <label for="technology">Technology</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s6">
-                        <input name="jobs" class="filled-in" type="checkbox" id="engineering" />
-                        <label for="engineering">Engineering</label>
-                    </div>
-
-                    <div class="col s6">
-                        <input name="jobs" class="filled-in" type="checkbox" id="mathematics" />
-                        <label for="mathematics">Mathematics</label>
-                    </div>
-                    <input type="hidden" name="role" value="stem">
-                </div>
-
-                <div class="form-group row mb-0">
-                    <div class="col-md-6 offset-md-4">
-                        <button type="submit" class="waves-effect waves-light btn register">
-                            Register
-                        </button>
-                    </div>
-                </div>
             </form>
         </div>
     </div>

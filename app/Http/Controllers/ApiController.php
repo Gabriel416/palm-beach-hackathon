@@ -10,6 +10,7 @@ use App\Professional;
 use Twilio\Rest\Client;
 use Twilio\Jwt\AccessToken;
 use Twilio\Jwt\Grants\VideoGrant;
+use Validator;
 
 class ApiController extends Controller
 {
@@ -65,6 +66,10 @@ class ApiController extends Controller
     {
         //
     }
+
+
+
+
 
     /**
      * Display the specified resource.
