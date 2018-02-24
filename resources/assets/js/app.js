@@ -8,26 +8,30 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import Vuetify from 'vuetify'
 import VueRouter from 'vue-router';
+import VideoRoom from './scenes/VideoRoom/index.vue';
 
 //IMPORT VUEX STORE
 // import { store } from './store';
 
 
-// Vue.use(VueRouter);
+Vue.use(VueRouter);
+Vue.use(Vuetify)
 
+// CSS
+import 'vuetify/dist/vuetify.min.css'
 
-// const routes = [
-//     { path: '/upload', component: walkthrough },
-//     { path: '/animated', component: AnimatedOptions },
-//     { path: '/preview', component: PhotoPreview }
+const uri = '/app';
 
-// ];
+const routes = [
+    { path: `${uri}/video`, component: VideoRoom },
+];
 
-// const router = new VueRouter({
-//     routes,
-//     mode: 'history'
-// });
+const router = new VueRouter({
+    routes,
+    mode: 'history'
+});
 
 
 /**
@@ -36,7 +40,7 @@ import VueRouter from 'vue-router';
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('video-chat', require('./VideoChat/Video.vue'));
+// Vue.component('video-room', require('./scenes/VideoRoom/index.vue'));
 // Vue.component('app-wrapper', require('./AppContainer/AppWrapper.vue'));
 // Vue.component('walkthrough', require('./AppContainer/walkthrough.vue'));
 // Vue.component('animated-options', require('./AppContainer/AnimatedOptions.vue'));
@@ -44,7 +48,7 @@ Vue.component('video-chat', require('./VideoChat/Video.vue'));
 
 const app = new Vue({
     // store,
-    // router,
+    router,
     el: '#app'
 });
 

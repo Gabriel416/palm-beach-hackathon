@@ -22,6 +22,7 @@
     "dependencies": {
         "twilio-video": "^1.8.0",
         "vue-router": "^3.0.1",
+        "vuetify": "^1.0.3",
         "vuex": "^3.0.1"
     }
 }
