@@ -12,14 +12,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-
-
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <script src="//media.twiliocdn.com/sdk/js/video/v1/twilio-video.min.js"></script>
     <style>
         html, body {
             background-color: #fff;
@@ -53,9 +48,6 @@
 
     <!-- Scripts -->
     @yield('scripts')
-<<<<<<< HEAD
-    <script src="{{ asset('js/app.js') }}"></script>
-=======
->>>>>>> 6d997672c79e337084a6217183ac54a0a3fe2f97
 </body>
 </html>
+Ï

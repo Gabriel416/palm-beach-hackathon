@@ -29,9 +29,8 @@ Route::post('/classroom', 'UserController@classroom');
 // Pages Controller
 Route::get('/app/{any}', 'PagesController@index')->where('any', '.*');
 
-Route::get('/test', function () {
-    return view('test');
-});
+// Api Controller
+Route::get('/get_twilio_token', 'ApiController@index');
 
 Auth::routes();
 

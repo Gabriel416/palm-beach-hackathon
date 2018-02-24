@@ -21,10 +21,29 @@ class ApiController extends Controller
      */
     public function index()
     {
-        // Your Account SID and Auth Token from twilio.com/console
-        $sid = env("TWILIO_ACCOUNT")
-        $token = env("TWILIO_SECRET");
-        $client = new Client($sid, $token);
+        // Use identity and room from query string if provided
+        // Substitute your Twilio AccountSid and ApiKey details\
+        $accountSid = env('TWILIO_ACCOUNT_SID');
+        $apiKeySid = env('TWILIO_API_KEY');
+        $apiKeySecret = env('TWILIO_API_SECRET');
+
+        $identity = 'example-user';
+
+        // Create an Access Token
+        $token = new AccessToken(
+            $accountSid,
+            $apiKeySid,
+            $apiKeySecret,
+            3600,
+            $identity
+        );
+
+        // Grant access to Video
+        $grant = new VideoGrant();
+        $grant->setRoom('my new room');
+        $token->addGrant($grant);
+
+        return $token->toJWT();
     }
 
     /**
