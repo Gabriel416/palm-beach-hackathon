@@ -83,13 +83,18 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">meme</a>
+                    <a href="/test">bye</a>
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+                <div id="app">
+                    <video-chat></video-chat>
+                </div>
             </div>
         </div>
+        <script src="//media.twiliocdn.com/sdk/js/video/v1/twilio-video.min.js"></script>
+        <script src="{{asset('js/app.js')}}"></script>
     </body>
 </html>

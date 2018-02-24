@@ -28,8 +28,8 @@ class AddCategoryIdToQuestion extends Migration
     public function down()
     {
         Schema::table('questions', function (Blueprint $table) {
-            $table->dropColumn('category_id');
             $table->dropForeign(['category_id']);
+            $table->dropColumn('category_id');
         });
     }
 }

@@ -20,6 +20,11 @@ class Professional extends Model
     {
         return $this->belongsTo('App\Job');
     }
+    
+    public function questions()
+    {
+        return $this->hasMany('App\Question');
+    }
 
     public static function find($userId)
     {
