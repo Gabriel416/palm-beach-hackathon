@@ -9,9 +9,12 @@ use App\Professional;
 class Question extends Model
 {
     protected $fillable = [
-        'professional_id', 'classroom_id', 'twilio_id', 'title'
+        'title', 'professional_id', 'classroom_id', 'twilio_id', 'category_id'
     ];
 
+    public function category() {
+        return $this->belongsTo('App\Category');
+    }
 
     public function professional() {
         return $this->belongsTo('App\Professional');
