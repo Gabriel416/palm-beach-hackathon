@@ -14,7 +14,7 @@ import VueRouter from 'vue-router';
 // import { store } from './store';
 
 
-Vue.use(VueRouter);
+// Vue.use(VueRouter);
 
 
 // const routes = [
@@ -36,7 +36,7 @@ Vue.use(VueRouter);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('video-chat', require('./VideoChat/Video.vue'));
 // Vue.component('app-wrapper', require('./AppContainer/AppWrapper.vue'));
 // Vue.component('walkthrough', require('./AppContainer/walkthrough.vue'));
 // Vue.component('animated-options', require('./AppContainer/AnimatedOptions.vue'));

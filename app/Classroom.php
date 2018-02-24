@@ -16,6 +16,11 @@ class Classroom extends Model
         return $this->hasOne('App\User');
     }
 
+    public function questions()
+    {
+        return $this->hasMany('App\Question');
+    }
+
     public static function find($userId)
     {
         return User::with('classroom')->find($userId);
