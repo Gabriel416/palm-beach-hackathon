@@ -20,7 +20,7 @@ Route::get('/register/stem', function () {
 });
 
 Route::get('/register/class', function () {
-    return view('class');
+    return view('auth/class');
 });
 
 // Pages Controller
