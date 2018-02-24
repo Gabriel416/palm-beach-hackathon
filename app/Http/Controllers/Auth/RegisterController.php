@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Classroom;
+use App\Professional;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -62,11 +64,41 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+    {   
+        if($data['role'] == "class") {
+            //make user and Classroom here
+            return $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+
+
+            
+            $classRoom = new App\Classroom;
+            $classRoom->school = $data['school'];
+            $classRoom->city = $data['location'];
+            $classRoom->user_id = $user->id;
+            $classRoom->save();
+
+        } else {
+
+            return $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+
+            foreach ($request->$jobs as $job) {
+                $job = new App\Job;
+                $job->name = $job->name;
+            }
+
+            $professional = new App\Professional;
+            $professional->linked_in_id = $data['linkedIn'];
+            $professional->bio = $data['about'];
+            $professional->user_id = $user->id;
+            $professional->industry = $data['industry'];
+        }
     }
 }
