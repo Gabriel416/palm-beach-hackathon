@@ -140,7 +140,7 @@
 
         $.post('/authenticate', thisForm, function(data) {
                 console.log(data, 'data');
-                if(data == 'BAD') {
+                if(data == 'PROF') {
                     alert("Please be on the lookout for emails to answer question!");
                 } else if(data == 'OK'){
                     window.location.href = '/app/question';

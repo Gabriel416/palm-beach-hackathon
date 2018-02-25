@@ -87,12 +87,15 @@ public function classroom(Request $request) {
 public function authenticate(Request $request) {
 
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-    
-        if(Auth::user()->has('professional')) {
-            return 'BAD';
-        } elseif(Auth::user()) {
+        if(Auth::user()->professional) {
+            return 'PROF';
+        } elseif(Auth::user()->classroom) {
             return 'OK';
+        } else {
+            return 'BAD';
         }
+    } else {
+        return 'BAD';
     }
 }
 
