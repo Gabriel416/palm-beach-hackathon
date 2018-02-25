@@ -23,9 +23,14 @@ Route::get('/register/class', function () {
     return view('auth/class');
 });
 
+Route::get("/classroom/login", function() {
+    return view('auth/login');
+});
+
 //USER CONTROLLER
 Route::post('/classroom', 'UserController@classroom');
 Route::post('/professional', 'UserController@professional');
+Route::post('/authenticate', 'UserController@authenticate');
 
 // Question Controller
 Route::post('/question', 'QuestionsController@create');

@@ -62,7 +62,7 @@
 
 @section('content')
 <div class="row card-row register-container">
-    <div class="col s m5 card-col register-container-column">
+    <div class="col s m8 card-col register-container-column">
         <div class="logo-center">
             <img src="/images/logo.png">
         </div>

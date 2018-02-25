@@ -94,7 +94,7 @@
         </div>
 
         <div class="row">
-            <p class="login-instead">Already have an account? Log in</p>
+            <p class="login-instead">Already have an account? <a href="/classroom/login" style="color: #fff; text-decoration: underline;">Log in</a></p>
         </div>
     
     @endsection

@@ -166,7 +166,7 @@ var debugs = {};
 var debugEnviron;
 exports.debuglog = function(set) {
   if (isUndefined(debugEnviron))
-    debugEnviron = Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}).NODE_DEBUG || '';
+    debugEnviron = Object({"MIX_PUSHER_APP_CLUSTER":"us2","MIX_PUSHER_APP_KEY":"47809b95c8b11e10393e","NODE_ENV":"development"}).NODE_DEBUG || '';
   set = set.toUpperCase();
   if (!debugs[set]) {
     if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
@@ -74799,7 +74799,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.video-room-container {\n  margin-bottom: 30px;\n}\n.register {\n  text-align: center;\n  background-color: #FFB800;\n  color: white;\n  font-weight: bold;\n  width: 50%;\n  margin: 20px 0px 10px 0px;\n}\n.video-button-container {\n  margin-top: 30px;\n}\nvideo {\n  width: 500px;\n  border-radius: 20px;\n}\n.video-loader {\n  width: 500px;\n  margin: 0 auto;\n  height: 375px;\n  font-size: 50px;\n  color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.video-thanks {\n  position: relative;\n  font-weight: bold;\n  border-radius: 10px;\n  padding: 15px;\n  background-color: white;\n  width: 500px;\n  margin: 0 auto;\n  height: 375px;\n  font-size: 50px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-size: 25px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.video-wrapper {\n  position: relative;\n}\n.video-status {\n  font-size: 28px;\n}\n.local-media-div--position {\n  position: absolute;\n  left: 50%;\n  -webkit-transform: translateX(-50%);\n  transform: translateX(-50%);\n}\n.video-accept {\n  text-align: center;\n  background-color: #FFB800;\n  color: white;\n  font-weight: bold;\n  margin: 10px;\n}\n.star-wrapper {\n  unicode-bidi: bidi-override;\n  direction: rtl;\n}\n.video-star {\n  cursor: pointer;\n}\n.star-wrapper > .video-star:hover,\n.star-wrapper > .video-star:hover ~ .video-star {\n  color: #FFB800;\n}\n", ""]);
 
 // exports
 
@@ -74864,6 +74864,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -74873,26 +74894,45 @@ var _require = __webpack_require__(95),
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      loaded: false
+      loaded: false,
+      showJoin: false,
+      showEnd: false
     };
   },
+  methods: {
+    endCall: function endCall() {
+      var myFace = document.getElementById("local-media-div").firstChild;
+      document.getElementById("local-media-div").removeChild(myFace);
 
+      this.showEnd = true;
+    },
+    acceptVideo: function acceptVideo() {
+      this.showJoin = false;
+    },
+    videoEnd: function videoEnd() {
+      console.log(document);
+      document.getElementById("video-thanks").innerHTML = "Thanks!";
+    }
+  },
   mounted: function mounted() {
+    var that = this;
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/get_twilio_token").then(function (res) {
       console.log(res);
-      Twilio.Video.connect(res.data, { name: "my new room" }).then(function (room) {
-        console.log("Successfully joined a Room: ", room);
+      Twilio.Video.connect(res.data).then(function (room) {
 
         room.localParticipant.tracks.forEach(function (track) {
-          console.log(track);
+          var myFace = document.getElementById("local-media-div").firstChild;
+          document.getElementById("local-media-div").removeChild(myFace);
           document.getElementById("local-media-div").appendChild(track.attach());
         });
 
         room.on("participantConnected", function (participant) {
           console.log("A remote Participant connected: ", participant);
-
+          that.showJoin = true;
           participant.on("trackAdded", function (track) {
-            document.getElementById("remote-media-div").appendChild(track.attach());
+            var myFace = document.getElementById("local-media-div").firstChild;
+            document.getElementById("local-media-div").removeChild(myFace);
+            document.getElementById("local-media-div").appendChild(track.attach());
           });
         });
       }, function (error) {
@@ -96452,38 +96492,109 @@ var render = function() {
         "v-container",
         { attrs: { "grid-list-md": "", "text-xs-center": "" } },
         [
+          _c("div", { staticClass: "video-room-container" }, [
+            _c("img", { attrs: { src: "/images/logo.png" } })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "video-wrapper" }, [
+            _c(
+              "div",
+              {
+                class: { "local-media-div--position": _vm.showJoin },
+                attrs: { id: "local-media-div" }
+              },
+              [
+                _c("div", { staticClass: "video-loader" }, [
+                  _vm._v("Loading...")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _vm.showJoin
+              ? _c("div", { staticClass: "video-thanks" }, [
+                  _c("p", { staticClass: "video-status" }, [
+                    _vm._v("Dickbutt has joined the channel.")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "video-status" }, [
+                    _vm._v("Do you accept?")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "video-accept waves-effect waves-light btn",
+                        on: { click: _vm.acceptVideo }
+                      },
+                      [_vm._v("Yes")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "video-accept waves-effect waves-light btn",
+                        on: { click: _vm.acceptVideo }
+                      },
+                      [_vm._v("No")]
+                    )
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.showEnd
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "video-thanks",
+                    attrs: { id: "video-thanks" }
+                  },
+                  [
+                    _c("p", { staticClass: "video-status" }, [
+                      _vm._v("Rate Your Experience")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "star-wrapper",
+                        on: { click: _vm.videoEnd }
+                      },
+                      [
+                        _c("i", { staticClass: "far fa-star video-star" }),
+                        _vm._v(" "),
+                        _c("i", { staticClass: "far fa-star video-star" }),
+                        _vm._v(" "),
+                        _c("i", { staticClass: "far fa-star video-star" }),
+                        _vm._v(" "),
+                        _c("i", { staticClass: "far fa-star video-star" }),
+                        _vm._v(" "),
+                        _c("i", { staticClass: "far fa-star video-star" })
+                      ]
+                    )
+                  ]
+                )
+              : _vm._e()
+          ]),
+          _vm._v(" "),
           _c(
-            "v-layout",
-            { attrs: { row: "", wrap: "" } },
+            "div",
+            { staticClass: "col-md-6 offset-md-4 video-button-container" },
             [
               _c(
-                "v-flex",
-                { attrs: { xs12: "" } },
-                [
-                  _c(
-                    "v-card",
-                    { attrs: { color: "primary" } },
-                    [
-                      _c("v-card-text", { staticClass: "px-0" }, [
-                        _c("div", [_vm._v("Local")]),
-                        _vm._v(" "),
-                        _c("div", { attrs: { id: "local-media-div" } }),
-                        _vm._v(" "),
-                        _c("div", [_vm._v("Remote")]),
-                        _vm._v(" "),
-                        _c("div", { attrs: { id: "remote-media-div" } })
-                      ])
-                    ],
-                    1
-                  )
-                ],
-                1
+                "button",
+                {
+                  staticClass: "waves-effect waves-light btn register",
+                  attrs: { type: "submit" },
+                  on: { click: _vm.endCall }
+                },
+                [_vm._v("\n            END CHAT\n        ")]
               )
-            ],
-            1
+            ]
           )
-        ],
-        1
+        ]
       )
     ],
     1
@@ -96585,7 +96696,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n.full-height[data-v-80186aa4] {\n  background: url(\"/images/whitebg.png\") no-repeat;\n}\n.app-toolbar[data-v-80186aa4] {\n  background-color: #fff;\n  height: 150px;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.app-toolbar img[data-v-80186aa4] {\n  background: transparent;\n  margin: 80px auto 0 auto;\n}\ngit .question-text[data-v-80186aa4] {\n  color: #fff;\n}\n.job-wrapper[data-v-80186aa4] {\n  width: 80%;\n  margin: 30px auto 0 auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.subject-text[data-v-80186aa4] {\n  width: 90%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  margin: 20px auto 15px auto;\n  margin-left: 30px;\n  color: #fff;\n}\n.job-card[data-v-80186aa4] {\n  width: 20%;\n  cursor: pointer;\n  border-radius: 5px;\n  margin-right: 2.5%;\n  margin-left: 2.5%;\n  background-color: #fff;\n  -webkit-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n  box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n}\n.submit[data-v-80186aa4] {\n  width: 90%;\n  margin: 0 auto;\n  text-align: center;\n  background-color: #ffb800;\n  color: #fff;\n  font-weight: bold;\n  width: 100%;\n  margin: 20px 0px 10px 0px;\n}\n.text-field[data-v-80186aa4] {\n  width: 100%;\n}\n.vue-form[data-v-80186aa4] {\n  width: 80%;\n  margin: 25px auto 20px auto;\n  color: #000;\n  font-size: 20px;\n  font-weight: bold;\n}\n.input-group--text-field label[data-v-80186aa4] {\n  color: #fff !important;\n}\n.category-radio[data-v-80186aa4] {\n  visibility: hidden;\n}\n.active[data-v-80186aa4] {\n  border: 5px solid #ffb800;\n}\n", ""]);
+exports.push([module.i, "\n.full-height[data-v-80186aa4] {\n  background: url(\"/images/whitebg.png\") no-repeat;\n}\n.app-toolbar[data-v-80186aa4] {\n  background-color: #fbfbfb;\n  height: 150px;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.app-toolbar img[data-v-80186aa4] {\n  background: transparent;\n  margin: 80px auto 0 auto;\n}\ngit .question-text[data-v-80186aa4] {\n  color: #fff;\n}\n.job-wrapper[data-v-80186aa4] {\n  width: 80%;\n  margin: 30px auto 0 auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.subject-text[data-v-80186aa4] {\n  width: 90%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  margin: 20px auto 15px auto;\n  margin-left: 30px;\n  color: #fff;\n}\n.job-card[data-v-80186aa4] {\n  width: 20%;\n  cursor: pointer;\n  border-radius: 5px;\n  margin-right: 2.5%;\n  margin-left: 2.5%;\n  background-color: #fff;\n  -webkit-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n  box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n}\n.submit[data-v-80186aa4] {\n  width: 90%;\n  margin: 0 auto;\n  text-align: center;\n  background-color: #ffb800;\n  color: #fff;\n  font-weight: bold;\n  width: 100%;\n  margin: 20px 0px 10px 0px;\n}\n.text-field[data-v-80186aa4] {\n  width: 100%;\n}\n.vue-form[data-v-80186aa4] {\n  width: 80%;\n  margin: 25px auto 20px auto;\n  color: #000;\n  font-size: 20px;\n  font-weight: bold;\n}\n.input-group--text-field label[data-v-80186aa4] {\n  color: #fff !important;\n}\n.category-radio[data-v-80186aa4] {\n  visibility: hidden;\n}\n.active[data-v-80186aa4] {\n  border: 5px solid #ffb800;\n}\n", ""]);
 
 // exports
 
@@ -96701,7 +96812,7 @@ var render = function() {
     [
       _c("v-toolbar", { staticClass: "app-toolbar" }, [
         _c("img", {
-          attrs: { src: "/images/white-seeds-logo.png", alt: "seeds logo" }
+          attrs: { src: "/images/seeds-logo.png", alt: "seeds logo" }
         })
       ]),
       _vm._v(" "),
