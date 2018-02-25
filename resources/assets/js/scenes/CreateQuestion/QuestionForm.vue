@@ -1,7 +1,7 @@
 <template lang="html">
   <section>
     <v-toolbar class="app-toolbar">
-        <img src="/images/white-seeds-logo.png" alt="seeds logo">
+    <img src="/images/seeds-logo.png" alt="seeds logo">
   </v-toolbar>
     <v-container grid-list-md text-xs-center>
       <v-layout row wrap>
@@ -93,7 +93,7 @@ export default {
 };
 </script>
 
-  <style scoped>
+  <style>
 .full-height {
   background: url("/images/whitebg.png") no-repeat;
 }
@@ -109,8 +109,8 @@ export default {
   background: transparent;
   margin: 80px auto 0 auto;
 }
-git .question-text {
-  color: #fff;
+.question-text {
+  margin-top: 100px;
 }
 
 .job-wrapper {
@@ -127,7 +127,7 @@ git .question-text {
   justify-content: flex-start;
   margin: 20px auto 15px auto;
   margin-left: 30px;
-  color: #fff;
+  /* color: #fff; */
 }
 
 .job-card {
@@ -166,7 +166,7 @@ git .question-text {
 }
 
 .input-group--text-field label {
-  color: #fff !important;
+  /* color: #fff !important; */
 }
 
 .category-radio {
@@ -175,5 +175,10 @@ git .question-text {
 
 .active {
   border: 5px solid #ffb800;
+}
+
+.full-height {
+  background-color: white;
+  background-image: url("/images/whitebg.png");
 }
 </style>
