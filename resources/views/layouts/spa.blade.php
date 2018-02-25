@@ -23,18 +23,23 @@
             color: #636b6f;
             font-family: 'Raleway', sans-serif;
             font-weight: 100;
-            height: 100vh;
+            height: 100%;
+            overflow-y: auto !important;
             margin: 0;
         }
 
         .full-height {
-            height: 100vh;
+            min-height: 100%;
             background-color: black;
             background-image: url("/images/Rectangle.png");
             background-size: cover;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        #app {
+            height: 100%;
         }
     </style>
     @yield('styles')
@@ -54,4 +59,3 @@
     @include ('footer')
 </body>
 </html>
-Ï

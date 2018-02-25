@@ -25,7 +25,7 @@ class QuestionsController extends Controller
 
         foreach($profs as $prof) {
             $email = $prof->email;
-            Mail::send('emails.accept', ['name' => $classroom->name, 'question' => $q->title, 'questionLink' => '/app/video?name=' . $prof->name], function ($message) use ($email, $subject)
+            Mail::send('emails.accept', ['name' => $prof->name, 'question' => $q->title, 'questionLink' => '/app/video?name=' . $prof->name], function ($message) use ($email, $subject)
             {
                 $message->from('gabe@nebularagency.com');
                 $message->to($email);
