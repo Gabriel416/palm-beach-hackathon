@@ -25,6 +25,7 @@ Route::get('/register/class', function () {
 
 //USER CONTROLLER
 Route::post('/classroom', 'UserController@classroom');
+Route::post('/professional', 'UserController@professional');
 
 // Pages Controller
 Route::get('/app/{any}', 'PagesController@index')->where('any', '.*');

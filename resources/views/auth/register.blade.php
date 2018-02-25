@@ -60,7 +60,7 @@
     <div class="col s m5 card-col register-container-column">
         <div class="card-body">
             <h1>Sigh up as STEM Professional!</h1>
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="/professional" id="professional">
                 @csrf
 
                 <div class="form-group row">
@@ -117,23 +117,23 @@
                 
                 <div class="row">
                     <div class="col s6">
-                        <input name="jobs" class="filled-in" type="checkbox" id="science" />
+                        <input name="jobs[]" value="Science" class="filled-in" type="checkbox" id="science" />
                         <label for="science">Science</label>
                     </div>
 
                     <div class="col s6">
-                        <input name="jobs" class="filled-in" type="checkbox" id="technology" />
+                        <input name="jobs[]" value="Technology" class="filled-in" type="checkbox" id="technology" />
                         <label for="technology">Technology</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s6">
-                        <input name="jobs" class="filled-in" type="checkbox" id="engineering" />
+                        <input name="jobs[]" value="Engineering" class="filled-in" type="checkbox" id="engineering" />
                         <label for="engineering">Engineering</label>
                     </div>
 
                     <div class="col s6">
-                        <input name="jobs" class="filled-in" type="checkbox" id="mathematics" />
+                        <input name="jobs[]" value="Mathematics" class="filled-in" type="checkbox" id="mathematics" />
                         <label for="mathematics">Mathematics</label>
                     </div>
                     <input type="hidden" name="role" value="stem">
@@ -150,4 +150,23 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script
+  <script type="text/javascript">
+    $("#professional").submit(function(event) {
+        event.preventDefault();
+        console.log('form submit');
+        var thisForm = $("#professional").serialize();
+
+        $.post('/professional', thisForm, function(data) {
+                console.log(data, 'data');
+            })
+            .fail(function(data) {
+                console.log(data, 'fail')
+            });
+    })
+  </script>
+
 @endsection
