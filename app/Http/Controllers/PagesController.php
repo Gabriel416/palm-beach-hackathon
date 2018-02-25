@@ -10,8 +10,10 @@ use App\User;
 class PagesController extends Controller
 {
     public function index(Request $request) {
+        $user = Auth::user() ? User::with('professional', 'classroom')->find(Auth::user()->id) : null;
+
         JavaScript::put([
-            'user' =>  User::with('professional', 'classroom')->find(Auth::user()->id),
+            'user' =>  $user
         ]);
 
 
