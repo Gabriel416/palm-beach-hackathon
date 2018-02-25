@@ -44,7 +44,7 @@ class UserController extends Controller
             //     $job->name = $job->name;
             //     $job->save();
             // }
-            $jobIds = Job::wherIn('name', $jobs)->get()->pluck('id');
+            $jobIds = Job::whereIn('name', $jobs)->get()->pluck('id');
             $professional->jobs()->attach($jobIds);
             return 'OK';
     }

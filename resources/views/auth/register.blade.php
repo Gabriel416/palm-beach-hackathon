@@ -171,6 +171,7 @@
 
         $.post('/professional', thisForm, function(data) {
                 console.log(data, 'data');
+                window.location.href = "/register/completed";
             })
             .fail(function(data) {
                 console.log(data, 'fail')

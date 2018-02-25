@@ -23,6 +23,10 @@ Route::get('/register/class', function () {
     return view('auth/class');
 });
 
+Route::get('/register/completed', function () {
+    return view('auth/completed');
+});
+
 //USER CONTROLLER
 Route::post('/classroom', 'UserController@classroom');
 Route::post('/professional', 'UserController@professional');

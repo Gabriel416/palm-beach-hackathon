@@ -189,4 +189,9 @@ video {
 .star-wrapper > .video-star:hover ~ .video-star {
   color: #FFB800;
 }
+
+.full-height {
+  background-color: black;
+  background-image: url("/images/Rectangle.png");
+}
 </style>
