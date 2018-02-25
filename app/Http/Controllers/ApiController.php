@@ -27,7 +27,7 @@ class ApiController extends Controller
         $apiKeySid = env('TWILIO_API_KEY');
         $apiKeySecret = env('TWILIO_API_SECRET');
 
-        $identity = 'example-user';
+        $identity = 'test';
 
         // Create an Access Token
         $token = new AccessToken(
