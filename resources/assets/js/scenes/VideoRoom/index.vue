@@ -9,7 +9,7 @@
           <div class="video-loader">Loading...</div>
         </div>
         <div v-if="showJoin" class="video-thanks">
-          <p class="video-status">Dickbutt has joined the channel.</p>
+          <p class="video-status">A User has joined the channel.</p>
           <p class="video-status">Do you accept?</p>
           <div>
             <button @click="acceptVideo" class="video-accept waves-effect waves-light btn">Yes</button>
@@ -73,10 +73,9 @@ export default {
         console.log(res);
         Twilio.Video.connect(res.data).then(
           (room) => {
-            
-            room.localParticipant.tracks.forEach(track => {
-              const myFace = document.getElementById("local-media-div").firstChild;
+            const myFace = document.getElementById("local-media-div").firstChild;
               document.getElementById("local-media-div").removeChild(myFace);
+            room.localParticipant.tracks.forEach(track => {
               document
                 .getElementById("local-media-div")
                 .appendChild(track.attach());
