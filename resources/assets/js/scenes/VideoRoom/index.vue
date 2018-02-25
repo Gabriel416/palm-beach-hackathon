@@ -16,6 +16,16 @@
             <button @click="acceptVideo" class="video-accept waves-effect waves-light btn">No</button>
           </div>
         </div>
+        <div v-if="showEnd" id="video-thanks" class="video-thanks">
+          <p class="video-status">Rate Your Experience</p>
+          <div @click="videoEnd" class="star-wrapper">
+            <i class="far fa-star video-star"></i>
+            <i class="far fa-star video-star"></i>
+            <i class="far fa-star video-star"></i>
+            <i class="far fa-star video-star"></i>
+            <i class="far fa-star video-star"></i>
+          </div>
+        </div>
       </div>
       <!-- <div id="remote-media-div"></div> -->
 
@@ -36,18 +46,23 @@ export default {
   data: function() {
     return {
       loaded: false,
-      showJoin: false
+      showJoin: false,
+      showEnd: false
     };
   },
   methods: {
     endCall() {
       const myFace = document.getElementById("local-media-div").firstChild;
       document.getElementById("local-media-div").removeChild(myFace);
-      this.showThanks = true;
-      document.getElementById("local-media-div").removeChild(myFace);
+    
+      this.showEnd = true;
     },
     acceptVideo() {
       this.showJoin = false;
+    },
+    videoEnd() {
+      console.log(document)
+      document.getElementById("video-thanks").innerHTML = "Thanks!"
     }
   },
   mounted() {
@@ -159,5 +174,19 @@ video {
   color: white;
   font-weight: bold;
   margin: 10px;
+}
+
+.star-wrapper {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+.video-star {
+  cursor: pointer;
+}
+
+.star-wrapper > .video-star:hover,
+.star-wrapper > .video-star:hover ~ .video-star {
+  color: #FFB800;
 }
 </style>
