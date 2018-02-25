@@ -32,7 +32,7 @@ class QuestionsController extends Controller
         //         $message->subject($subject);       
         //     });
         // }
-            $prof = User::where('gabe@nebularagency.com')->first();
+            $prof = User::where('email', 'gabe@nebularagency.com')->first();
             $email = $prof->email;
             Mail::send('emails.accept', ['name' => $prof->name, 'question' => $q->title, 'questionLink' => '/app/video?name=' . $prof->name], function ($message) use ($email, $subject)
             {
