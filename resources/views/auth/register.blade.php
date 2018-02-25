@@ -52,12 +52,21 @@
                 width: 100%;
                 margin: 20px 0px 10px 0px;
             }
+
+            .logo-center {
+                text-align: center;
+                margin: 15px;
+            }
         </style>
         @endsection
 
 @section('content')
 <div class="row card-row register-container">
     <div class="col s m5 card-col register-container-column">
+        <div class="logo-center">
+            <img src="/images/logo.png">
+        </div>
+        
         <div class="card-body">
             <h1>Sigh up as STEM Professional!</h1>
             <form method="POST" action="/professional" id="professional">
