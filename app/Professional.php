@@ -18,7 +18,7 @@ class Professional extends Model
 
     public function jobs()
     {
-        return $this->hasMany('App\Job');
+        return $this->belongsToMany('App\Job');
     }
     
     public function questions()

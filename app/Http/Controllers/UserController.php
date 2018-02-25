@@ -39,12 +39,13 @@ class UserController extends Controller
     
             $professional->save();
 
-            foreach ($jobs as $job) {
-                $job = new Job;
-                $job->name = $job->name;
-                $job->save();
-            }
-            $professional->jobs()->attach();
+            // foreach ($jobs as $job) {
+            //     $job = new Job;
+            //     $job->name = $job->name;
+            //     $job->save();
+            // }
+            $jobIds = Job::wherIn('name', $jobs)->get()->pluck('id');
+            $professional->jobs()->attach($jobIds);
             return 'OK';
     }
 }
