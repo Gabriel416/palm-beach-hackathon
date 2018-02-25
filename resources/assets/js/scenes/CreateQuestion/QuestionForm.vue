@@ -11,27 +11,27 @@
             <form method="POST" action="/ask/question">
             <div class="job-wrapper">
                 <p class="display-1 subject-text">Choose a subject:</p>
-                <div class="job-card">
+                <div class="job-card" @click="science" v-bind:class="{ active: subject == 'science'}">
                     <img src="/images/science.png" alt="science">
                 </div>
-                 <div class="job-card">
-                    <img src="/images/technology.png" alt="science">
+                 <div class="job-card" @click="tech"  v-bind:class="{ active: subject == 'technology'}">
+                    <img src="/images/technology.png" alt="technology">
                 </div>
-                 <div class="job-card">
-                    <img src="/images/engineering.png" alt="science">
+                 <div class="job-card" @click="engineering" v-bind:class="{ active: subject == 'engineering'}">
+                    <img src="/images/engineering.png" alt="engineering">
                 </div>
-                 <div class="job-card">
-                    <img src="/images/math.png" alt="science">
+                 <div class="job-card" @click="math" v-bind:class="{ active: subject == 'mathematics'}">
+                    <img src="/images/math.png" alt="mathematics">
                 </div>
                <v-form v-model="valid" class="vue-form">
                 <v-text-field
                 label="Subject"
-                v-model="subject"
+                v-model="subjectLine"
                 required
                 ></v-text-field>
                 <v-text-field
                 label="Question"
-                v-model="question"
+                v-model="title"
                 required
                 ></v-text-field>
             </v-form>
@@ -52,7 +52,8 @@ export default {
     return {
       loaded: false,
       subject: "",
-      question: ""
+      subjectLine: "",
+      title: ""
     };
   },
 
@@ -61,9 +62,34 @@ export default {
   },
 
   methods: {
+    science() {
+      this.subject = "science";
+    },
+    tech() {
+      this.subject = "technology";
+    },
+    engineering() {
+      this.subject = "engineering";
+    },
+    math() {
+      this.subject = "mathematics";
+    },
     submitQuestion(event) {
       event.preventDefault();
       console.log("hello");
+      axios
+        .post("/question", {
+          subject,
+          title,
+          subjectLine
+        })
+        .then(function(response) {
+          console.log(response);
+          this.$router.push({ path: "/app/lobby" });
+        })
+        .catch(function(error) {
+          alert(error);
+        });
     }
   }
 };
@@ -109,6 +135,7 @@ export default {
 
 .job-card {
   width: 20%;
+  cursor: pointer;
   border-radius: 5px;
   margin-right: 2.5%;
   margin-left: 2.5%;
@@ -143,5 +170,13 @@ export default {
 
 .input-group--text-field label {
   color: #fff !important;
+}
+
+.category-radio {
+  visibility: hidden;
+}
+
+.active {
+  border: 5px solid #ffb800;
 }
 </style>
