@@ -54,7 +54,8 @@ export default {
     endCall() {
       const myFace = document.getElementById("local-media-div").firstChild;
       document.getElementById("local-media-div").removeChild(myFace);
-    
+      const herFace = document.getElementById("local-media-div").firstChild;
+      document.getElementById("local-media-div").removeChild(herFace);
       this.showEnd = true;
     },
     acceptVideo() {
