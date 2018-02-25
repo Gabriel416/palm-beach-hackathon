@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use JavaScript;
 use Illuminate\Http\Request;
+use App\User;
 
 class PagesController extends Controller
 {
     public function index(Request $request) {
         JavaScript::put([
-            'user' => Auth::user(),
+            'user' =>  User::with('professional', 'classroom')->find(Auth::user()->id),
         ]);
+
 
         return view('vue');
     }

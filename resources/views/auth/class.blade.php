@@ -123,13 +123,14 @@
                     </div>
                 </div>
 
+
                 <input type="hidden" name="role" value="class">
 
                 <div class="form-group row">
                     <label for="location" class="col-md-4 col-form-label text-md-right">Where is your school located?</label>
 
                     <div class="col-md-6">
-                        <input id="about" type="text" class="form-control" name="location" required>
+                        <input id="about" type="text" class="form-control" name="city" required>
                     </div>
                 </div>
                 <div class="form-group row mb-0">
@@ -151,10 +152,10 @@
         event.preventDefault();
         console.log('form submit');
         var thisForm = $("#classroom-form").serialize();
-        return false;
 
         $.post('/classroom', thisForm, function(data) {
                 console.log(data, 'data');
+                window.location.href = '/app/question';
             })
             .fail(function(data) {
                 console.log(data, 'fail')

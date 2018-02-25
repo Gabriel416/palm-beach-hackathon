@@ -96585,7 +96585,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n.full-height[data-v-80186aa4] {\r\n  background: url(\"/images/whitebg.png\") no-repeat;\n}\n.app-toolbar[data-v-80186aa4] {\r\n  background-color: #fff;\r\n  height: 150px;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\n}\n.app-toolbar img[data-v-80186aa4] {\r\n  background: transparent;\r\n  margin: 80px auto 0 auto;\n}\n.question-text[data-v-80186aa4] {\r\n  color: #fff;\n}\n.job-wrapper[data-v-80186aa4] {\r\n  width: 80%;\r\n  margin: 30px auto 0 auto;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  -ms-flex-wrap: wrap;\r\n      flex-wrap: wrap;\n}\n.subject-text[data-v-80186aa4] {\r\n  width: 90%;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: start;\r\n      -ms-flex-pack: start;\r\n          justify-content: flex-start;\r\n  margin: 20px auto 15px auto;\r\n  margin-left: 30px;\r\n  color: #fff;\n}\n.job-card[data-v-80186aa4] {\r\n  width: 20%;\r\n  cursor: pointer;\r\n  border-radius: 5px;\r\n  margin-right: 2.5%;\r\n  margin-left: 2.5%;\r\n  background-color: #fff;\r\n  -webkit-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\r\n  box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n}\n.submit[data-v-80186aa4] {\r\n  width: 90%;\r\n  margin: 0 auto;\r\n  text-align: center;\r\n  background-color: #ffb800;\r\n  color: #fff;\r\n  font-weight: bold;\r\n  width: 100%;\r\n  margin: 20px 0px 10px 0px;\n}\n.text-field[data-v-80186aa4] {\r\n  width: 100%;\n}\n.vue-form[data-v-80186aa4] {\r\n  width: 80%;\r\n  margin: 25px auto 20px auto;\r\n  color: #000;\r\n  font-size: 20px;\r\n  font-weight: bold;\n}\n.input-group--text-field label[data-v-80186aa4] {\r\n  color: #fff !important;\n}\n.category-radio[data-v-80186aa4] {\r\n  visibility: hidden;\n}\n.active[data-v-80186aa4] {\r\n  border: 5px solid #ffb800;\n}\r\n", ""]);
+exports.push([module.i, "\n.full-height[data-v-80186aa4] {\n  background: url(\"/images/whitebg.png\") no-repeat;\n}\n.app-toolbar[data-v-80186aa4] {\n  background-color: #fff;\n  height: 150px;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.app-toolbar img[data-v-80186aa4] {\n  background: transparent;\n  margin: 80px auto 0 auto;\n}\ngit .question-text[data-v-80186aa4] {\n  color: #fff;\n}\n.job-wrapper[data-v-80186aa4] {\n  width: 80%;\n  margin: 30px auto 0 auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.subject-text[data-v-80186aa4] {\n  width: 90%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  margin: 20px auto 15px auto;\n  margin-left: 30px;\n  color: #fff;\n}\n.job-card[data-v-80186aa4] {\n  width: 20%;\n  cursor: pointer;\n  border-radius: 5px;\n  margin-right: 2.5%;\n  margin-left: 2.5%;\n  background-color: #fff;\n  -webkit-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n  box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n}\n.submit[data-v-80186aa4] {\n  width: 90%;\n  margin: 0 auto;\n  text-align: center;\n  background-color: #ffb800;\n  color: #fff;\n  font-weight: bold;\n  width: 100%;\n  margin: 20px 0px 10px 0px;\n}\n.text-field[data-v-80186aa4] {\n  width: 100%;\n}\n.vue-form[data-v-80186aa4] {\n  width: 80%;\n  margin: 25px auto 20px auto;\n  color: #000;\n  font-size: 20px;\n  font-weight: bold;\n}\n.input-group--text-field label[data-v-80186aa4] {\n  color: #fff !important;\n}\n.category-radio[data-v-80186aa4] {\n  visibility: hidden;\n}\n.active[data-v-80186aa4] {\n  border: 5px solid #ffb800;\n}\n", ""]);
 
 // exports
 
@@ -96596,8 +96596,6 @@ exports.push([module.i, "\n.full-height[data-v-80186aa4] {\r\n  background: url(
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
 //
 //
 //
@@ -96673,13 +96671,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     math: function math() {
       this.subject = "mathematics";
     },
-    submitQuestion: function submitQuestion(event) {
-      event.preventDefault();
+    submitQuestion: function submitQuestion() {
       console.log("hello");
       axios.post("/question", {
-        subject: subject,
-        title: title,
-        subjectLine: subjectLine
+        subject: this.subject,
+        title: this.title,
+        subjectLine: this.subjectLine,
+        classroom_id: window.user.classroom.id
       }).then(function (response) {
         console.log(response);
         //   this.$router.push({ path: "/app/lobby" });
@@ -96703,7 +96701,7 @@ var render = function() {
     [
       _c("v-toolbar", { staticClass: "app-toolbar" }, [
         _c("img", {
-          attrs: { src: "/images/seeds-logo.png", alt: "seeds logo" }
+          attrs: { src: "/images/white-seeds-logo.png", alt: "seeds logo" }
         })
       ]),
       _vm._v(" "),
@@ -96721,144 +96719,142 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c(
-                  "form",
-                  { attrs: { method: "POST", action: "/ask/question" } },
+                  "div",
+                  { staticClass: "job-wrapper" },
                   [
+                    _c("p", { staticClass: "display-1 subject-text" }, [
+                      _vm._v("Choose a subject:")
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "job-wrapper" },
+                      {
+                        staticClass: "job-card",
+                        class: { active: _vm.subject == "science" },
+                        on: { click: _vm.science }
+                      },
                       [
-                        _c("p", { staticClass: "display-1 subject-text" }, [
-                          _vm._v("Choose a subject:")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "job-card",
-                            class: { active: _vm.subject == "science" },
-                            on: { click: _vm.science }
+                        _c("img", {
+                          attrs: { src: "/images/science.png", alt: "science" }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "job-card",
+                        class: { active: _vm.subject == "technology" },
+                        on: { click: _vm.tech }
+                      },
+                      [
+                        _c("img", {
+                          attrs: {
+                            src: "/images/technology.png",
+                            alt: "technology"
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "job-card",
+                        class: { active: _vm.subject == "engineering" },
+                        on: { click: _vm.engineering }
+                      },
+                      [
+                        _c("img", {
+                          attrs: {
+                            src: "/images/engineering.png",
+                            alt: "engineering"
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "job-card",
+                        class: { active: _vm.subject == "mathematics" },
+                        on: { click: _vm.math }
+                      },
+                      [
+                        _c("img", {
+                          attrs: { src: "/images/math.png", alt: "mathematics" }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-form",
+                      {
+                        staticClass: "vue-form",
+                        model: {
+                          value: _vm.valid,
+                          callback: function($$v) {
+                            _vm.valid = $$v
                           },
-                          [
-                            _c("img", {
-                              attrs: {
-                                src: "/images/science.png",
-                                alt: "science"
-                              }
-                            })
-                          ]
-                        ),
+                          expression: "valid"
+                        }
+                      },
+                      [
+                        _c("v-text-field", {
+                          attrs: { label: "Subject", required: "" },
+                          model: {
+                            value: _vm.subjectLine,
+                            callback: function($$v) {
+                              _vm.subjectLine = $$v
+                            },
+                            expression: "subjectLine"
+                          }
+                        }),
                         _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "job-card",
-                            class: { active: _vm.subject == "technology" },
-                            on: { click: _vm.tech }
-                          },
-                          [
-                            _c("img", {
-                              attrs: {
-                                src: "/images/technology.png",
-                                alt: "technology"
-                              }
-                            })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "job-card",
-                            class: { active: _vm.subject == "engineering" },
-                            on: { click: _vm.engineering }
-                          },
-                          [
-                            _c("img", {
-                              attrs: {
-                                src: "/images/engineering.png",
-                                alt: "engineering"
-                              }
-                            })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "job-card",
-                            class: { active: _vm.subject == "mathematics" },
-                            on: { click: _vm.math }
-                          },
-                          [
-                            _c("img", {
-                              attrs: {
-                                src: "/images/math.png",
-                                alt: "mathematics"
-                              }
-                            })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-form",
-                          {
-                            staticClass: "vue-form",
-                            model: {
-                              value: _vm.valid,
-                              callback: function($$v) {
-                                _vm.valid = $$v
-                              },
-                              expression: "valid"
-                            }
-                          },
-                          [
-                            _c("v-text-field", {
-                              attrs: { label: "Subject", required: "" },
-                              model: {
-                                value: _vm.subjectLine,
-                                callback: function($$v) {
-                                  _vm.subjectLine = $$v
-                                },
-                                expression: "subjectLine"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("v-text-field", {
-                              attrs: { label: "Question", required: "" },
-                              model: {
-                                value: _vm.title,
-                                callback: function($$v) {
-                                  _vm.title = $$v
-                                },
-                                expression: "title"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "waves-effect waves-light btn submit",
-                            attrs: { type: "submit" },
-                            on: {
-                              click: function($event) {
-                                _vm.submitQuestion(_vm.event)
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              " \n                          Submit\n          "
-                            )
-                          ]
-                        )
+                        _c("v-text-field", {
+                          attrs: { label: "Question", required: "" },
+                          model: {
+                            value: _vm.title,
+                            callback: function($$v) {
+                              _vm.title = $$v
+                            },
+                            expression: "title"
+                          }
+                        })
                       ],
                       1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "waves-effect waves-light btn submit",
+                        on: {
+                          click: function($event) {
+                            if (
+                              !("button" in $event) &&
+                              _vm._k(
+                                $event.keyCode,
+                                "preventDefault",
+                                undefined,
+                                $event.key
+                              )
+                            ) {
+                              return null
+                            }
+                            _vm.submitQuestion($event)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          " \n                          Submit\n          "
+                        )
+                      ]
                     )
-                  ]
+                  ],
+                  1
                 )
               ])
             ],
@@ -96967,7 +96963,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n.connecting {\n  color: #fff;\n}\n.beaker {\n  margin-top: 25px;\n  height: 100px;\n}\n.link {\n  text-align: center;\n  background-color: #ffb800;\n  color: white;\n  font-weight: bold;\n  width: 50%;\n  margin: 20px 0px 10px 0px;\n}\n", ""]);
+exports.push([module.i, "\n.beaker {\n  margin-top: 25px;\n  height: 100px;\n}\n.link {\n  text-align: center;\n  background-color: #ffb800;\n  color: white;\n  font-weight: bold;\n  width: 50%;\n  margin: 20px 0px 10px 0px;\n}\n.full-height {\n  background-color: white;\n  background-image: url(\"/images/whitebg.png\");\n}\n.app-toolbar img {\n  background: transparent;\n  margin: 80px auto 0 auto;\n}\n.app-toolbar {\n  background-color: #fff;\n  height: 150px;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n", ""]);
 
 // exports
 
@@ -96980,6 +96976,9 @@ exports.push([module.i, "\n.connecting {\n  color: #fff;\n}\n.beaker {\n  margin
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+//
+//
+//
 //
 //
 //
@@ -97029,6 +97028,12 @@ var render = function() {
   return _c(
     "section",
     [
+      _c("v-toolbar", { staticClass: "app-toolbar" }, [
+        _c("img", {
+          attrs: { src: "/images/seeds-logo.png", alt: "seeds logo" }
+        })
+      ]),
+      _vm._v(" "),
       _c(
         "v-container",
         { attrs: { "grid-list-md": "", "text-xs-center": "" } },
@@ -97040,7 +97045,7 @@ var render = function() {
               _c("v-flex", { attrs: { xs12: "" } }, [
                 !_vm.showReadyButton
                   ? _c("div", [
-                      _c("div", { staticClass: "headline connecting" }, [
+                      _c("div", { staticClass: "headline" }, [
                         _vm._v("Connecting you to a STEM Professional...")
                       ]),
                       _vm._v(" "),
