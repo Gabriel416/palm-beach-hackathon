@@ -83,7 +83,7 @@ export default {
         })
         .then(function(response) {
           console.log(response);
-          //   this.$router.push({ path: "/app/lobby" });
+          this.$router.push({ path: "/app/lobby" });
         })
         .catch(function(error) {
           alert(error);

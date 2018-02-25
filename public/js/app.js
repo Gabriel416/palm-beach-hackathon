@@ -166,7 +166,7 @@ var debugs = {};
 var debugEnviron;
 exports.debuglog = function(set) {
   if (isUndefined(debugEnviron))
-    debugEnviron = Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}).NODE_DEBUG || '';
+    debugEnviron = Object({"MIX_PUSHER_APP_CLUSTER":"us2","MIX_PUSHER_APP_KEY":"47809b95c8b11e10393e","NODE_ENV":"development"}).NODE_DEBUG || '';
   set = set.toUpperCase();
   if (!debugs[set]) {
     if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
@@ -654,7 +654,7 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(17)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(18)))
 
 /***/ }),
 /* 1 */
@@ -1489,7 +1489,7 @@ function isUndefined(arg) {
 "use strict";
 
 
-var bind = __webpack_require__(31);
+var bind = __webpack_require__(33);
 var isBuffer = __webpack_require__(68);
 
 /*global toString:true*/
@@ -3913,6 +3913,88 @@ module.exports = StateMachine;
 
 /***/ }),
 /* 12 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4026,14 +4108,14 @@ module.exports = LocalAudioTrack;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var inherits = __webpack_require__(0).inherits;
-var Track = __webpack_require__(26);
+var Track = __webpack_require__(28);
 var DefaultDataTrackSender = __webpack_require__(110);
 var buildLogLevels = __webpack_require__(1).buildLogLevels;
 var DEFAULT_LOG_LEVEL = __webpack_require__(2).DEFAULT_LOG_LEVEL;
@@ -4167,7 +4249,7 @@ module.exports = LocalDataTrack;
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4272,13 +4354,13 @@ module.exports = LocalVideoTrack;
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(67);
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4301,10 +4383,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(32);
+    adapter = __webpack_require__(34);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(32);
+    adapter = __webpack_require__(34);
   }
   return adapter;
 }
@@ -4379,10 +4461,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)))
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -4572,95 +4654,350 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 18 */
-/***/ (function(module, exports) {
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
 
 /*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
 */
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
 
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
+var hasDocument = typeof document !== 'undefined'
 
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
 }
 
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+var listToStyles = __webpack_require__(93)
 
-	return '/*# ' + data + ' */';
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
 }
 
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
 
-/***/ }),
-/* 19 */
-/***/ (function(module, exports) {
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
 
-module.exports = {"_args":[["twilio-video@1.8.0","/Users/owl/Documents/hackathons/palm-beach-hackathon"]],"_from":"twilio-video@1.8.0","_id":"twilio-video@1.8.0","_inBundle":false,"_integrity":"sha1-2RNilWibxdAatunqXeWZu6r1NOI=","_location":"/twilio-video","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"twilio-video@1.8.0","name":"twilio-video","escapedName":"twilio-video","rawSpec":"1.8.0","saveSpec":null,"fetchSpec":"1.8.0"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/twilio-video/-/twilio-video-1.8.0.tgz","_spec":"1.8.0","_where":"/Users/owl/Documents/hackathons/palm-beach-hackathon","author":{"name":"Mark Andrus Roberts","email":"mroberts@twilio.com"},"browser":{"ws":"./src/ws.js","xmlhttprequest":"./src/xmlhttprequest.js"},"bugs":{"url":"https://github.com/twilio/twilio-video.js/issues"},"contributors":[{"name":"Ryan Rowland","email":"rrowland@twilio.com"},{"name":"Manjesh Malavalli","email":"mmalavalli@twilio.com"}],"dependencies":{"@twilio/sip.js":"^0.7.7","@twilio/webrtc":"^2.0.0","ws":"^3.3.1","xmlhttprequest":"^1.8.0"},"description":"Twilio Video JavaScript library","devDependencies":{"@types/express":"^4.11.0","@types/node":"^8.5.1","@types/selenium-webdriver":"^3.0.8","@types/ws":"^3.2.1","browserify":"^14.3.0","cheerio":"^0.22.0","chromedriver":"2.28.0","envify":"^4.0.0","eslint":"^4.9.0","express":"^4.16.2","geckodriver":"1.4.0","ink-docstrap":"^1.3.0","istanbul":"^0.4.5","jsdoc":"^3.4.3","karma":"^1.6.0","karma-browserify":"^5.1.1","karma-chrome-launcher":"^2.0.0","karma-firefox-launcher":"^1.0.1","karma-mocha":"^1.3.0","karma-safaritechpreview-launcher":"0.0.6","karma-spec-reporter":"^0.0.31","mocha":"^3.2.0","npm-run-all":"^4.0.2","phantom":"^4.0.2","release-tool":"^0.2.2","requirejs":"^2.3.3","rimraf":"^2.6.1","selenium-webdriver":"3.3.0","sinon":"^4.0.1","travis-multirunner":"^4.0.0","ts-node":"4.0.1","tslint":"5.8.0","twilio":"^2.11.1","typescript":"2.6.2","uglify-js":"^2.8.22","vinyl-fs":"^2.4.4","vinyl-source-stream":"^1.1.0","webrtc-adapter":"^4.1.1"},"engines":{"node":">=0.12"},"homepage":"https://twilio.com","keywords":["twilio","webrtc","library","javascript","video","rooms"],"license":"BSD-3-Clause","main":"./lib/index.js","name":"twilio-video","repository":{"type":"git","url":"git+https://github.com/twilio/twilio-video.js.git"},"scripts":{"build":"npm-run-all clean lint docs cover test:integration build:js build:min.js test:umd","build:js":"node ./scripts/build.js ./src/twilio-video.js ./LICENSE.md ./dist/twilio-video.js","build:min.js":"uglifyjs ./dist/twilio-video.js -o ./dist/twilio-video.min.js --comments \"/^! twilio-video.js/\" -b beautify=false,ascii_only=true","build:quick":"npm-run-all clean lint docs build:js build:min.js","build:travis":"npm-run-all clean lint docs cover test:integration:travis build:js build:min.js test:umd test:framework","clean":"rimraf ./coverage ./dist","cover":"istanbul cover node_modules/mocha/bin/_mocha -- ./test/unit/index.js","docs":"node ./scripts/docs.js ./dist/docs","lint":"eslint ./lib ./test/*.js ./test/framework/*.js ./test/lib/*.js ./test/integration/** ./test/unit/**","test":"npm-run-all test:unit test:integration","test:crossbrowser":"npm-run-all test:crossbrowser:*","test:crossbrowser:build":"npm-run-all test:crossbrowser:build:*","test:crossbrowser:build:browser":"cd ./test/crossbrowser && browserify lib/crossbrowser/src/browser/index.js > src/browser/index.js","test:crossbrowser:build:clean":"rimraf ./test/crossbrowser/lib ./test/crossbrowser/src/browser/index.js","test:crossbrowser:build:lint":"cd ./test/crossbrowser && tslint --project tsconfig.json","test:crossbrowser:build:tsc":"cd ./test/crossbrowser && tsc","test:crossbrowser:test":"cd ./test/crossbrowser && mocha --compilers ts:ts-node/register test/integration/spec/**/*.ts","test:framework":"npm-run-all test:framework:meteor test:framework:no-framework test:framework:react","test:framework:angular":"npm-run-all test:framework:angular:*","test:framework:angular:install":"cd ./test/framework/twilio-video-angular && rimraf ./node_modules && npm install","test:framework:angular:run":"mocha ./test/framework/twilio-video-angular.js","test:framework:angular:test":"node ./scripts/framework.js twilio-video-angular","test:framework:meteor":"npm-run-all test:framework:meteor:*","test:framework:meteor:install":"cd ./test/framework/twilio-video-meteor && rimraf ./node_modules && npm install","test:framework:meteor:run":"mocha ./test/framework/twilio-video-meteor.js","test:framework:meteor:test":"node ./scripts/framework.js twilio-video-meteor","test:framework:no-framework":"npm-run-all test:framework:no-framework:*","test:framework:no-framework:run":"mocha ./test/framework/twilio-video-no-framework.js","test:framework:react":"npm-run-all test:framework:react:*","test:framework:react:build":"cd ./test/framework/twilio-video-react && npm run build","test:framework:react:install":"cd ./test/framework/twilio-video-react && rimraf ./node_modules && npm install","test:framework:react:run":"mocha ./test/framework/twilio-video-react.js","test:framework:react:test":"node ./scripts/framework.js twilio-video-react","test:integration":"node ./scripts/karma.js karma/integration.conf.js","test:integration:adapter":"node ./scripts/karma.js karma/integration.adapter.conf.js","test:integration:travis":"node ./scripts/integration.js","test:sdkdriver":"npm-run-all test:sdkdriver:*","test:sdkdriver:build":"npm-run-all test:sdkdriver:build:*","test:sdkdriver:build:clean":"rimraf ./test/lib/sdkdriver/lib ./test/lib/sdkdriver/test/integration/browser/index.js","test:sdkdriver:build:lint":"cd ./test/lib/sdkdriver && tslint --project tsconfig.json","test:sdkdriver:build:tsc":"cd ./test/lib/sdkdriver && tsc --rootDir src","test:sdkdriver:test":"npm-run-all test:sdkdriver:test:*","test:sdkdriver:test:integration":"npm-run-all test:sdkdriver:test:integration:*","test:sdkdriver:test:integration:browser":"cd ./test/lib/sdkdriver/test/integration && browserify browser/browser.js > browser/index.js","test:sdkdriver:test:integration:run":"cd ./test/lib/sdkdriver && mocha --compilers ts:ts-node/register test/integration/spec/**/*.ts","test:sdkdriver:test:unit":"cd ./test/lib/sdkdriver && mocha --compilers ts:ts-node/register test/unit/spec/**/*.ts","test:umd":"mocha ./test/umd/index.js","test:unit":"mocha ./test/unit/index.js"},"title":"Twilio Video","version":"1.8.0"}
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction, _options) {
+  isProduction = _isProduction
+
+  options = _options || {}
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
 
 /***/ }),
 /* 20 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+module.exports = {"_from":"twilio-video","_id":"twilio-video@1.8.0","_inBundle":false,"_integrity":"sha1-2RNilWibxdAatunqXeWZu6r1NOI=","_location":"/twilio-video","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"twilio-video","name":"twilio-video","escapedName":"twilio-video","rawSpec":"","saveSpec":null,"fetchSpec":"latest"},"_requiredBy":["#USER","/"],"_resolved":"https://registry.npmjs.org/twilio-video/-/twilio-video-1.8.0.tgz","_shasum":"d9136295689bc5d01ab6e9ea5de599bbaaf534e2","_spec":"twilio-video","_where":"C:\\localdev\\palm-beach-hackathon","author":{"name":"Mark Andrus Roberts","email":"mroberts@twilio.com"},"browser":{"ws":"./src/ws.js","xmlhttprequest":"./src/xmlhttprequest.js"},"bugs":{"url":"https://github.com/twilio/twilio-video.js/issues"},"bundleDependencies":false,"contributors":[{"name":"Ryan Rowland","email":"rrowland@twilio.com"},{"name":"Manjesh Malavalli","email":"mmalavalli@twilio.com"}],"dependencies":{"@twilio/sip.js":"^0.7.7","@twilio/webrtc":"^2.0.0","ws":"^3.3.1","xmlhttprequest":"^1.8.0"},"deprecated":false,"description":"Twilio Video JavaScript library","devDependencies":{"@types/express":"^4.11.0","@types/node":"^8.5.1","@types/selenium-webdriver":"^3.0.8","@types/ws":"^3.2.1","browserify":"^14.3.0","cheerio":"^0.22.0","chromedriver":"2.28.0","envify":"^4.0.0","eslint":"^4.9.0","express":"^4.16.2","geckodriver":"1.4.0","ink-docstrap":"^1.3.0","istanbul":"^0.4.5","jsdoc":"^3.4.3","karma":"^1.6.0","karma-browserify":"^5.1.1","karma-chrome-launcher":"^2.0.0","karma-firefox-launcher":"^1.0.1","karma-mocha":"^1.3.0","karma-safaritechpreview-launcher":"0.0.6","karma-spec-reporter":"^0.0.31","mocha":"^3.2.0","npm-run-all":"^4.0.2","phantom":"^4.0.2","release-tool":"^0.2.2","requirejs":"^2.3.3","rimraf":"^2.6.1","selenium-webdriver":"3.3.0","sinon":"^4.0.1","travis-multirunner":"^4.0.0","ts-node":"4.0.1","tslint":"5.8.0","twilio":"^2.11.1","typescript":"2.6.2","uglify-js":"^2.8.22","vinyl-fs":"^2.4.4","vinyl-source-stream":"^1.1.0","webrtc-adapter":"^4.1.1"},"engines":{"node":">=0.12"},"homepage":"https://twilio.com","keywords":["twilio","webrtc","library","javascript","video","rooms"],"license":"BSD-3-Clause","main":"./lib/index.js","name":"twilio-video","repository":{"type":"git","url":"git+https://github.com/twilio/twilio-video.js.git"},"scripts":{"build":"npm-run-all clean lint docs cover test:integration build:js build:min.js test:umd","build:js":"node ./scripts/build.js ./src/twilio-video.js ./LICENSE.md ./dist/twilio-video.js","build:min.js":"uglifyjs ./dist/twilio-video.js -o ./dist/twilio-video.min.js --comments \"/^! twilio-video.js/\" -b beautify=false,ascii_only=true","build:quick":"npm-run-all clean lint docs build:js build:min.js","build:travis":"npm-run-all clean lint docs cover test:integration:travis build:js build:min.js test:umd test:framework","clean":"rimraf ./coverage ./dist","cover":"istanbul cover node_modules/mocha/bin/_mocha -- ./test/unit/index.js","docs":"node ./scripts/docs.js ./dist/docs","lint":"eslint ./lib ./test/*.js ./test/framework/*.js ./test/lib/*.js ./test/integration/** ./test/unit/**","test":"npm-run-all test:unit test:integration","test:crossbrowser":"npm-run-all test:crossbrowser:*","test:crossbrowser:build":"npm-run-all test:crossbrowser:build:*","test:crossbrowser:build:browser":"cd ./test/crossbrowser && browserify lib/crossbrowser/src/browser/index.js > src/browser/index.js","test:crossbrowser:build:clean":"rimraf ./test/crossbrowser/lib ./test/crossbrowser/src/browser/index.js","test:crossbrowser:build:lint":"cd ./test/crossbrowser && tslint --project tsconfig.json","test:crossbrowser:build:tsc":"cd ./test/crossbrowser && tsc","test:crossbrowser:test":"cd ./test/crossbrowser && mocha --compilers ts:ts-node/register test/integration/spec/**/*.ts","test:framework":"npm-run-all test:framework:meteor test:framework:no-framework test:framework:react","test:framework:angular":"npm-run-all test:framework:angular:*","test:framework:angular:install":"cd ./test/framework/twilio-video-angular && rimraf ./node_modules && npm install","test:framework:angular:run":"mocha ./test/framework/twilio-video-angular.js","test:framework:angular:test":"node ./scripts/framework.js twilio-video-angular","test:framework:meteor":"npm-run-all test:framework:meteor:*","test:framework:meteor:install":"cd ./test/framework/twilio-video-meteor && rimraf ./node_modules && npm install","test:framework:meteor:run":"mocha ./test/framework/twilio-video-meteor.js","test:framework:meteor:test":"node ./scripts/framework.js twilio-video-meteor","test:framework:no-framework":"npm-run-all test:framework:no-framework:*","test:framework:no-framework:run":"mocha ./test/framework/twilio-video-no-framework.js","test:framework:react":"npm-run-all test:framework:react:*","test:framework:react:build":"cd ./test/framework/twilio-video-react && npm run build","test:framework:react:install":"cd ./test/framework/twilio-video-react && rimraf ./node_modules && npm install","test:framework:react:run":"mocha ./test/framework/twilio-video-react.js","test:framework:react:test":"node ./scripts/framework.js twilio-video-react","test:integration":"node ./scripts/karma.js karma/integration.conf.js","test:integration:adapter":"node ./scripts/karma.js karma/integration.adapter.conf.js","test:integration:travis":"node ./scripts/integration.js","test:sdkdriver":"npm-run-all test:sdkdriver:*","test:sdkdriver:build":"npm-run-all test:sdkdriver:build:*","test:sdkdriver:build:clean":"rimraf ./test/lib/sdkdriver/lib ./test/lib/sdkdriver/test/integration/browser/index.js","test:sdkdriver:build:lint":"cd ./test/lib/sdkdriver && tslint --project tsconfig.json","test:sdkdriver:build:tsc":"cd ./test/lib/sdkdriver && tsc --rootDir src","test:sdkdriver:test":"npm-run-all test:sdkdriver:test:*","test:sdkdriver:test:integration":"npm-run-all test:sdkdriver:test:integration:*","test:sdkdriver:test:integration:browser":"cd ./test/lib/sdkdriver/test/integration && browserify browser/browser.js > browser/index.js","test:sdkdriver:test:integration:run":"cd ./test/lib/sdkdriver && mocha --compilers ts:ts-node/register test/integration/spec/**/*.ts","test:sdkdriver:test:unit":"cd ./test/lib/sdkdriver && mocha --compilers ts:ts-node/register test/unit/spec/**/*.ts","test:umd":"mocha ./test/umd/index.js","test:unit":"mocha ./test/unit/index.js"},"title":"Twilio Video","version":"1.8.0"}
+
+/***/ }),
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4783,7 +5120,7 @@ module.exports = CancelablePromise;
 
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4792,9 +5129,9 @@ module.exports = CancelablePromise;
 var asLocalTrack = __webpack_require__(1).asLocalTrack;
 var buildLogLevels = __webpack_require__(1).buildLogLevels;
 var getUserMedia = __webpack_require__(10).getUserMedia;
-var LocalAudioTrack = __webpack_require__(12);
-var LocalDataTrack = __webpack_require__(13);
-var LocalVideoTrack = __webpack_require__(14);
+var LocalAudioTrack = __webpack_require__(13);
+var LocalDataTrack = __webpack_require__(14);
+var LocalVideoTrack = __webpack_require__(15);
 var MediaStreamTrack = __webpack_require__(10).MediaStreamTrack;
 var Log = __webpack_require__(6);
 var DEFAULT_LOG_LEVEL = __webpack_require__(2).DEFAULT_LOG_LEVEL;
@@ -4930,7 +5267,7 @@ module.exports = createLocalTracks;
 
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4976,7 +5313,7 @@ module.exports = EventTarget;
 
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5022,7 +5359,7 @@ module.exports = RTCRtpSenderShim;
 
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5244,7 +5581,7 @@ exports.updateUnifiedPlanTrackIdsToSSRCs = updateUnifiedPlanTrackIdsToSSRCs;
 
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5252,7 +5589,7 @@ exports.updateUnifiedPlanTrackIdsToSSRCs = updateUnifiedPlanTrackIdsToSSRCs;
 
 var MediaStream = __webpack_require__(10).MediaStream;
 var inherits = __webpack_require__(0).inherits;
-var Track = __webpack_require__(26);
+var Track = __webpack_require__(28);
 
 /**
  * Construct a {@link MediaTrack}.
@@ -5471,7 +5808,7 @@ module.exports = MediaTrack;
 
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5576,7 +5913,7 @@ module.exports = Track;
 
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5665,7 +6002,7 @@ module.exports = LocalTrackPublication;
 
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5813,7 +6150,7 @@ module.exports = ParticipantSignaling;
 
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5836,7 +6173,7 @@ module.exports = __webpack_require__(159)({
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8282,7 +8619,7 @@ Popper.Defaults = Defaults;
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(5)))
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8300,7 +8637,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8311,7 +8648,7 @@ var settle = __webpack_require__(71);
 var buildURL = __webpack_require__(73);
 var parseHeaders = __webpack_require__(74);
 var isURLSameOrigin = __webpack_require__(75);
-var createError = __webpack_require__(33);
+var createError = __webpack_require__(35);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(76);
 
 module.exports = function xhrAdapter(config) {
@@ -8487,7 +8824,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8512,7 +8849,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8524,7 +8861,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8547,343 +8884,6 @@ Cancel.prototype.toString = function toString() {
 Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
-
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(93)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
 
 
 /***/ }),
@@ -9092,7 +9092,7 @@ module.exports = typeof RTCSessionDescription !== 'undefined'
 
 
 var inherits = __webpack_require__(0).inherits;
-var MediaTrack = __webpack_require__(25);
+var MediaTrack = __webpack_require__(27);
 
 /**
  * Construct an {@link AudioTrack}.
@@ -9245,7 +9245,7 @@ module.exports = AudioTrack;
 var buildLogLevels = __webpack_require__(1).buildLogLevels;
 var Log = __webpack_require__(6);
 var DEFAULT_LOG_LEVEL = __webpack_require__(2).DEFAULT_LOG_LEVEL;
-var MediaTrack = __webpack_require__(25);
+var MediaTrack = __webpack_require__(27);
 var MediaTrackSender = __webpack_require__(44);
 
 /**
@@ -9520,7 +9520,7 @@ module.exports = DataTrackTransceiver;
 
 
 var inherits = __webpack_require__(0).inherits;
-var MediaTrack = __webpack_require__(25);
+var MediaTrack = __webpack_require__(27);
 
 /**
  * Construct a {@link VideoTrack}.
@@ -10785,7 +10785,7 @@ module.exports = WebSocket;
 "use strict";
 
 
-var SIP = __webpack_require__(29);
+var SIP = __webpack_require__(31);
 
 function SIPJSMediaHandler(peerConnectionManager, createMessage) {
   if (!(this instanceof SIPJSMediaHandler)) {
@@ -10896,7 +10896,7 @@ module.exports = SIPJSMediaHandler;
 "use strict";
 
 
-var defaultCreateLocalTracks = __webpack_require__(21);
+var defaultCreateLocalTracks = __webpack_require__(23);
 var DEFAULT_LOG_LEVEL = __webpack_require__(2).DEFAULT_LOG_LEVEL;
 
 /**
@@ -11002,7 +11002,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(61);
-module.exports = __webpack_require__(207);
+module.exports = __webpack_require__(212);
 
 
 /***/ }),
@@ -11016,11 +11016,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__scenes_VideoRoom_index_vue__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__scenes_VideoRoom_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__scenes_VideoRoom_index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scenes_CreateQuestion_QuestionForm_vue__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scenes_CreateQuestion_QuestionForm_vue__ = __webpack_require__(198);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scenes_CreateQuestion_QuestionForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__scenes_CreateQuestion_QuestionForm_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scenes_Lobby_index_vue__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scenes_Lobby_index_vue__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scenes_Lobby_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__scenes_Lobby_index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css__);
 
 /**
@@ -11081,7 +11081,7 @@ var app = new Vue({
 
 
 window._ = __webpack_require__(63);
-window.Popper = __webpack_require__(30).default;
+window.Popper = __webpack_require__(32).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -11101,7 +11101,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(15);
+window.axios = __webpack_require__(16);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -28279,7 +28279,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-	 true ? factory(exports, __webpack_require__(66), __webpack_require__(30)) :
+	 true ? factory(exports, __webpack_require__(66), __webpack_require__(32)) :
 	typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
 	(factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -42548,9 +42548,9 @@ return jQuery;
 
 
 var utils = __webpack_require__(4);
-var bind = __webpack_require__(31);
+var bind = __webpack_require__(33);
 var Axios = __webpack_require__(69);
-var defaults = __webpack_require__(16);
+var defaults = __webpack_require__(17);
 
 /**
  * Create an instance of Axios
@@ -42583,9 +42583,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(35);
+axios.Cancel = __webpack_require__(37);
 axios.CancelToken = __webpack_require__(83);
-axios.isCancel = __webpack_require__(34);
+axios.isCancel = __webpack_require__(36);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -42633,7 +42633,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(16);
+var defaults = __webpack_require__(17);
 var utils = __webpack_require__(4);
 var InterceptorManager = __webpack_require__(78);
 var dispatchRequest = __webpack_require__(79);
@@ -42738,7 +42738,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(33);
+var createError = __webpack_require__(35);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -43171,8 +43171,8 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(4);
 var transformData = __webpack_require__(80);
-var isCancel = __webpack_require__(34);
-var defaults = __webpack_require__(16);
+var isCancel = __webpack_require__(36);
+var defaults = __webpack_require__(17);
 var isAbsoluteURL = __webpack_require__(81);
 var combineURLs = __webpack_require__(82);
 
@@ -43331,7 +43331,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(35);
+var Cancel = __webpack_require__(37);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -54497,7 +54497,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(17)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(18)))
 
 /***/ }),
 /* 88 */
@@ -74722,7 +74722,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(91)
 }
-var normalizeComponent = __webpack_require__(37)
+var normalizeComponent = __webpack_require__(20)
 /* script */
 var __vue_script__ = __webpack_require__(94)
 /* template */
@@ -74743,7 +74743,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/scenes/VideoRoom/index.vue"
+Component.options.__file = "resources\\assets\\js\\scenes\\VideoRoom\\index.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -74752,9 +74752,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c0774e3a", Component.options)
+    hotAPI.createRecord("data-v-238b96d4", Component.options)
   } else {
-    hotAPI.reload("data-v-c0774e3a", Component.options)
+    hotAPI.reload("data-v-238b96d4", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -74775,13 +74775,13 @@ var content = __webpack_require__(92);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(36)("332b52bc", content, false, {});
+var update = __webpack_require__(19)("1009c17a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c0774e3a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c0774e3a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-238b96d4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-238b96d4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -74794,7 +74794,7 @@ if(false) {
 /* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(18)(false);
+exports = module.exports = __webpack_require__(12)(false);
 // imports
 
 
@@ -74843,7 +74843,7 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
@@ -74951,7 +74951,7 @@ var _require = __webpack_require__(95),
 "use strict";
 
 
-var version = __webpack_require__(19).version;
+var version = __webpack_require__(21).version;
 var Video = {};
 
 Object.defineProperties(Video, {
@@ -74965,7 +74965,7 @@ Object.defineProperties(Video, {
   },
   createLocalTracks: {
     enumerable: true,
-    value: __webpack_require__(21)
+    value: __webpack_require__(23)
   },
   createLocalVideoTrack: {
     enumerable: true,
@@ -74977,15 +74977,15 @@ Object.defineProperties(Video, {
   },
   LocalAudioTrack: {
     enumerable: true,
-    value: __webpack_require__(12)
+    value: __webpack_require__(13)
   },
   LocalDataTrack: {
     enumerable: true,
-    value: __webpack_require__(13)
+    value: __webpack_require__(14)
   },
   LocalVideoTrack: {
     enumerable: true,
-    value: __webpack_require__(14)
+    value: __webpack_require__(15)
   },
   version: {
     enumerable: true,
@@ -75003,19 +75003,19 @@ module.exports = Video;
 "use strict";
 
 
-var CancelablePromise = __webpack_require__(20);
+var CancelablePromise = __webpack_require__(22);
 var createCancelableRoomPromise = __webpack_require__(97);
-var createLocalTracks = __webpack_require__(21);
+var createLocalTracks = __webpack_require__(23);
 var ConstantIceServerSource = __webpack_require__(111);
 var constants = __webpack_require__(2);
 var Room = __webpack_require__(112);
 var E = __webpack_require__(2).typeErrors;
 var EncodingParametersImpl = __webpack_require__(118);
 var guessBrowser = __webpack_require__(1).guessBrowser;
-var LocalAudioTrack = __webpack_require__(12);
-var LocalDataTrack = __webpack_require__(13);
+var LocalAudioTrack = __webpack_require__(13);
+var LocalDataTrack = __webpack_require__(14);
 var LocalParticipant = __webpack_require__(119);
-var LocalVideoTrack = __webpack_require__(14);
+var LocalVideoTrack = __webpack_require__(15);
 var Log = __webpack_require__(6);
 var MediaStreamTrack = __webpack_require__(10).MediaStreamTrack;
 var NTSIceServerSource = __webpack_require__(123);
@@ -75456,7 +75456,7 @@ module.exports = connect;
 "use strict";
 
 
-var CancelablePromise = __webpack_require__(20);
+var CancelablePromise = __webpack_require__(22);
 
 /**
  * Create a {@link CancelablePromise<Room>}.
@@ -75966,12 +75966,12 @@ switch (guessBrowser()) {
 
 
 var ChromeRTCSessionDescription = __webpack_require__(39);
-var EventTarget = __webpack_require__(22);
+var EventTarget = __webpack_require__(24);
 var inherits = __webpack_require__(0).inherits;
 var Latch = __webpack_require__(40);
 var MediaStream = __webpack_require__(38);
-var RTCRtpSenderShim = __webpack_require__(23);
-var updateTracksToSSRCs = __webpack_require__(24).updatePlanBTrackIdsToSSRCs;
+var RTCRtpSenderShim = __webpack_require__(25);
+var updateTracksToSSRCs = __webpack_require__(26).updatePlanBTrackIdsToSSRCs;
 var util = __webpack_require__(8);
 
 var PeerConnection = typeof RTCPeerConnection !== 'undefined'
@@ -76502,11 +76502,11 @@ if (typeof Object.create === 'function') {
 /* globals mozRTCPeerConnection, RTCPeerConnection */
 
 
-var EventTarget = __webpack_require__(22);
+var EventTarget = __webpack_require__(24);
 var FirefoxRTCSessionDescription = __webpack_require__(41);
-var RTCRtpSenderShim = __webpack_require__(23);
+var RTCRtpSenderShim = __webpack_require__(25);
 var inherits = __webpack_require__(0).inherits;
-var updateTracksToSSRCs = __webpack_require__(24).updateUnifiedPlanTrackIdsToSSRCs;
+var updateTracksToSSRCs = __webpack_require__(26).updateUnifiedPlanTrackIdsToSSRCs;
 var util = __webpack_require__(8);
 
 var PeerConnection = typeof RTCPeerConnection !== 'undefined'
@@ -76892,11 +76892,11 @@ module.exports = FirefoxRTCPeerConnection;
 /* globals RTCPeerConnection, RTCSessionDescription */
 
 
-var EventTarget = __webpack_require__(22);
+var EventTarget = __webpack_require__(24);
 var inherits = __webpack_require__(0).inherits;
 var Latch = __webpack_require__(40);
-var RTCRtpSenderShim = __webpack_require__(23);
-var updateTracksToSSRCs = __webpack_require__(24).updatePlanBTrackIdsToSSRCs;
+var RTCRtpSenderShim = __webpack_require__(25);
+var updateTracksToSSRCs = __webpack_require__(26).updatePlanBTrackIdsToSSRCs;
 var util = __webpack_require__(8);
 
 function SafariRTCPeerConnection(configuration) {
@@ -77294,7 +77294,7 @@ switch (guessBrowser()) {
 /* 109 */
 /***/ (function(module, exports) {
 
-module.exports = {"_args":[["@twilio/webrtc@2.0.0","/Users/owl/Documents/hackathons/palm-beach-hackathon"]],"_from":"@twilio/webrtc@2.0.0","_id":"@twilio/webrtc@2.0.0","_inBundle":false,"_integrity":"sha1-rpZEay6eKTK7ODjVzLfbpHUrwVg=","_location":"/@twilio/webrtc","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"@twilio/webrtc@2.0.0","name":"@twilio/webrtc","escapedName":"@twilio%2fwebrtc","scope":"@twilio","rawSpec":"2.0.0","saveSpec":null,"fetchSpec":"2.0.0"},"_requiredBy":["/twilio-video"],"_resolved":"https://registry.npmjs.org/@twilio/webrtc/-/webrtc-2.0.0.tgz","_spec":"2.0.0","_where":"/Users/owl/Documents/hackathons/palm-beach-hackathon","author":{"name":"Manjesh Malavalli","email":"mmalavalli@twilio.com"},"bugs":{"url":"https://github.com/twilio/twilio-webrtc.js/issues"},"contributors":[{"name":"Mark Roberts","email":"mroberts@twilio.com"},{"name":"Ryan Rowland","email":"rrowland@twilio.com"}],"description":"WebRTC-related APIs and shims used by twilio-video.js","devDependencies":{"browserify":"^14.4.0","envify":"^4.1.0","eslint":"^4.4.1","istanbul":"^0.4.5","karma":"^1.7.0","karma-browserify":"^5.1.1","karma-chrome-launcher":"^2.2.0","karma-firefox-launcher":"^1.0.1","karma-mocha":"^1.3.0","karma-safaritechpreview-launcher":"0.0.6","karma-spec-reporter":"0.0.31","mocha":"^3.5.0","npm-run-all":"^4.0.2","release-tool":"^0.2.2","rimraf":"^2.6.1","travis-multirunner":"^4.2.3","watchify":"^3.9.0","webrtc-adapter":"^6.0.1"},"homepage":"https://github.com/twilio/twilio-webrtc.js#readme","keywords":["shim","twilio","video","webrtc"],"license":"BSD-3-Clause","main":"./lib/index.js","name":"@twilio/webrtc","repository":{"type":"git","url":"git+https://github.com/twilio/twilio-webrtc.js.git"},"scripts":{"build":"npm-run-all clean lint test","clean":"rimraf coverage","lint":"eslint ./lib","test":"npm-run-all test:*","test:integration":"npm-run-all test:integration:*","test:integration:adapter":"karma start karma/integration.adapter.conf.js","test:integration:native":"karma start karma/integration.conf.js","test:unit":"istanbul cover node_modules/mocha/bin/_mocha -- ./test/unit/index.js"},"version":"2.0.0"}
+module.exports = {"_from":"@twilio/webrtc@^2.0.0","_id":"@twilio/webrtc@2.0.0","_inBundle":false,"_integrity":"sha1-rpZEay6eKTK7ODjVzLfbpHUrwVg=","_location":"/@twilio/webrtc","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"@twilio/webrtc@^2.0.0","name":"@twilio/webrtc","escapedName":"@twilio%2fwebrtc","scope":"@twilio","rawSpec":"^2.0.0","saveSpec":null,"fetchSpec":"^2.0.0"},"_requiredBy":["/twilio-video"],"_resolved":"https://registry.npmjs.org/@twilio/webrtc/-/webrtc-2.0.0.tgz","_shasum":"ae96446b2e9e2932bb3838d5ccb7dba4752bc158","_spec":"@twilio/webrtc@^2.0.0","_where":"C:\\localdev\\palm-beach-hackathon\\node_modules\\twilio-video","author":{"name":"Manjesh Malavalli","email":"mmalavalli@twilio.com"},"bugs":{"url":"https://github.com/twilio/twilio-webrtc.js/issues"},"bundleDependencies":false,"contributors":[{"name":"Mark Roberts","email":"mroberts@twilio.com"},{"name":"Ryan Rowland","email":"rrowland@twilio.com"}],"deprecated":false,"description":"WebRTC-related APIs and shims used by twilio-video.js","devDependencies":{"browserify":"^14.4.0","envify":"^4.1.0","eslint":"^4.4.1","istanbul":"^0.4.5","karma":"^1.7.0","karma-browserify":"^5.1.1","karma-chrome-launcher":"^2.2.0","karma-firefox-launcher":"^1.0.1","karma-mocha":"^1.3.0","karma-safaritechpreview-launcher":"0.0.6","karma-spec-reporter":"0.0.31","mocha":"^3.5.0","npm-run-all":"^4.0.2","release-tool":"^0.2.2","rimraf":"^2.6.1","travis-multirunner":"^4.2.3","watchify":"^3.9.0","webrtc-adapter":"^6.0.1"},"homepage":"https://github.com/twilio/twilio-webrtc.js#readme","keywords":["shim","twilio","video","webrtc"],"license":"BSD-3-Clause","main":"./lib/index.js","name":"@twilio/webrtc","repository":{"type":"git","url":"git+https://github.com/twilio/twilio-webrtc.js.git"},"scripts":{"build":"npm-run-all clean lint test","clean":"rimraf coverage","lint":"eslint ./lib","test":"npm-run-all test:*","test:integration":"npm-run-all test:integration:*","test:integration:adapter":"karma start karma/integration.adapter.conf.js","test:integration:native":"karma start karma/integration.conf.js","test:unit":"istanbul cover node_modules/mocha/bin/_mocha -- ./test/unit/index.js"},"version":"2.0.0"}
 
 /***/ }),
 /* 110 */
@@ -78042,7 +78042,7 @@ var inherits = __webpack_require__(0).inherits;
 var buildLogLevels = __webpack_require__(1).buildLogLevels;
 var DEFAULT_LOG_LEVEL = __webpack_require__(2).DEFAULT_LOG_LEVEL;
 var Log = __webpack_require__(6);
-var Track = __webpack_require__(26);
+var Track = __webpack_require__(28);
 
 /**
  * Construct a {@link RemoteDataTrack} from a {@link DataTrackReceiver}.
@@ -78416,9 +78416,9 @@ module.exports = EncodingParametersImpl;
 var util = __webpack_require__(1);
 var inherits = __webpack_require__(0).inherits;
 var E = __webpack_require__(2).typeErrors;
-var LocalAudioTrack = __webpack_require__(12);
-var LocalDataTrack = __webpack_require__(13);
-var LocalVideoTrack = __webpack_require__(14);
+var LocalAudioTrack = __webpack_require__(13);
+var LocalDataTrack = __webpack_require__(14);
+var LocalVideoTrack = __webpack_require__(15);
 var MediaStreamTrack = __webpack_require__(10).MediaStreamTrack;
 var Participant = __webpack_require__(49);
 var LocalAudioTrackPublication = __webpack_require__(120);
@@ -79078,7 +79078,7 @@ module.exports = LocalParticipant;
 
 
 var inherits = __webpack_require__(0).inherits;
-var LocalTrackPublication = __webpack_require__(27);
+var LocalTrackPublication = __webpack_require__(29);
 
 /**
  * Construct a {@link LocalAudioTrackPublication}.
@@ -79118,7 +79118,7 @@ module.exports = LocalAudioTrackPublication;
 
 
 var inherits = __webpack_require__(0).inherits;
-var LocalTrackPublication = __webpack_require__(27);
+var LocalTrackPublication = __webpack_require__(29);
 
 /**
  * Construct a {@link LocalDataTrackPublication}.
@@ -79158,7 +79158,7 @@ module.exports = LocalDataTrackPublication;
 
 
 var inherits = __webpack_require__(0).inherits;
-var LocalTrackPublication = __webpack_require__(27);
+var LocalTrackPublication = __webpack_require__(29);
 
 /**
  * Construct a {@link LocalVideoTrackPublication}.
@@ -79204,7 +79204,7 @@ var inherits = __webpack_require__(0).inherits;
 var Log = __webpack_require__(6);
 var TimeoutPromise = __webpack_require__(128);
 var util = __webpack_require__(1);
-var version = __webpack_require__(19).version;
+var version = __webpack_require__(21).version;
 
 var instances = 0;
 
@@ -79780,7 +79780,7 @@ var defaultCreateCancelableRoomSignalingPromise = __webpack_require__(130);
 var inherits = __webpack_require__(0).inherits;
 var LocalParticipantV2 = __webpack_require__(192);
 var Signaling = __webpack_require__(195);
-var SIP = __webpack_require__(29);
+var SIP = __webpack_require__(31);
 var SIPJSMediaHandler = __webpack_require__(58);
 var util = __webpack_require__(1);
 
@@ -79896,7 +79896,7 @@ module.exports = SignalingV2;
 "use strict";
 
 
-var CancelablePromise = __webpack_require__(20);
+var CancelablePromise = __webpack_require__(22);
 var DefaultPeerConnectionManager = __webpack_require__(131);
 var DefaultRoomV2 = __webpack_require__(149);
 var DefaultTransport = __webpack_require__(155);
@@ -83265,7 +83265,7 @@ module.exports = RemoteParticipantV2;
 
 
 var inherits = __webpack_require__(0).inherits;
-var ParticipantSignaling = __webpack_require__(28);
+var ParticipantSignaling = __webpack_require__(30);
 
 /**
  * Construct a {@link RemoteParticipantSignaling}.
@@ -83410,10 +83410,10 @@ module.exports = RemoteTrackSignaling;
 
 var constants = __webpack_require__(2);
 var inherits = __webpack_require__(0).inherits;
-var packageInfo = __webpack_require__(19);
+var packageInfo = __webpack_require__(21);
 var InsightsPublisher = __webpack_require__(156);
 var NullInsightsPublisher = __webpack_require__(157);
-var SIP = __webpack_require__(29);
+var SIP = __webpack_require__(31);
 var DefaultSIPJSMediaHandler = __webpack_require__(58);
 var StateMachine = __webpack_require__(11);
 var util = __webpack_require__(1);
@@ -84737,7 +84737,7 @@ return SIP;
 /* 160 */
 /***/ (function(module, exports) {
 
-module.exports = {"_args":[["@twilio/sip.js@0.7.7","/Users/owl/Documents/hackathons/palm-beach-hackathon"]],"_from":"@twilio/sip.js@0.7.7","_id":"@twilio/sip.js@0.7.7","_inBundle":false,"_integrity":"sha1-z/UPZvmyldRvIZc3tyeAx9Dm31I=","_location":"/@twilio/sip.js","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"@twilio/sip.js@0.7.7","name":"@twilio/sip.js","escapedName":"@twilio%2fsip.js","scope":"@twilio","rawSpec":"0.7.7","saveSpec":null,"fetchSpec":"0.7.7"},"_requiredBy":["/twilio-video"],"_resolved":"https://registry.npmjs.org/@twilio/sip.js/-/sip.js-0.7.7.tgz","_spec":"0.7.7","_where":"/Users/owl/Documents/hackathons/palm-beach-hackathon","author":{"name":"OnSIP","email":"developer@onsip.com","url":"http://sipjs.com/authors/"},"browser":{"./src/environment.js":"./src/environment_browser.js"},"bugs":{"url":"https://github.com/onsip/SIP.js/issues"},"contributors":[{"url":"https://github.com/onsip/SIP.js/blob/master/THANKS.md"}],"description":"A simple, intuitive, and powerful JavaScript signaling library","devDependencies":{"beefy":"^2.1.5","browserify":"^4.1.8","grunt":"~0.4.0","grunt-browserify":"^4.0.1","grunt-cli":"~0.1.6","grunt-contrib-copy":"^0.5.0","grunt-contrib-jasmine":"^1.0.3","grunt-contrib-jshint":">0.5.0","grunt-contrib-uglify":"~0.2.0","grunt-peg":"~1.3.1","grunt-trimtrailingspaces":"^0.4.0","pegjs":"^0.8.0","release-tool":"^0.2.2"},"engines":{"node":">=0.12"},"homepage":"http://sipjs.com","keywords":["sip","websocket","webrtc","library","javascript"],"license":"MIT","main":"src/index.js","name":"@twilio/sip.js","repository":{"type":"git","url":"git+https://github.com/onsip/SIP.js.git"},"scripts":{"build":"grunt build","repl":"beefy test/repl.js --open","test":"grunt travis --verbose"},"title":"SIP.js","version":"0.7.7"}
+module.exports = {"_from":"@twilio/sip.js@^0.7.7","_id":"@twilio/sip.js@0.7.7","_inBundle":false,"_integrity":"sha1-z/UPZvmyldRvIZc3tyeAx9Dm31I=","_location":"/@twilio/sip.js","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"@twilio/sip.js@^0.7.7","name":"@twilio/sip.js","escapedName":"@twilio%2fsip.js","scope":"@twilio","rawSpec":"^0.7.7","saveSpec":null,"fetchSpec":"^0.7.7"},"_requiredBy":["/twilio-video"],"_resolved":"https://registry.npmjs.org/@twilio/sip.js/-/sip.js-0.7.7.tgz","_shasum":"cff50f66f9b295d46f219737b72780c7d0e6df52","_spec":"@twilio/sip.js@^0.7.7","_where":"C:\\localdev\\palm-beach-hackathon\\node_modules\\twilio-video","author":{"name":"OnSIP","email":"developer@onsip.com","url":"http://sipjs.com/authors/"},"browser":{"./src/environment.js":"./src/environment_browser.js"},"bugs":{"url":"https://github.com/onsip/SIP.js/issues"},"bundleDependencies":false,"contributors":[{"url":"https://github.com/onsip/SIP.js/blob/master/THANKS.md"}],"deprecated":false,"description":"A simple, intuitive, and powerful JavaScript signaling library","devDependencies":{"beefy":"^2.1.5","browserify":"^4.1.8","grunt":"~0.4.0","grunt-browserify":"^4.0.1","grunt-cli":"~0.1.6","grunt-contrib-copy":"^0.5.0","grunt-contrib-jasmine":"^1.0.3","grunt-contrib-jshint":">0.5.0","grunt-contrib-uglify":"~0.2.0","grunt-peg":"~1.3.1","grunt-trimtrailingspaces":"^0.4.0","pegjs":"^0.8.0","release-tool":"^0.2.2"},"engines":{"node":">=0.12"},"homepage":"http://sipjs.com","keywords":["sip","websocket","webrtc","library","javascript"],"license":"MIT","main":"src/index.js","name":"@twilio/sip.js","repository":{"type":"git","url":"git+https://github.com/onsip/SIP.js.git"},"scripts":{"build":"grunt build","repl":"beefy test/repl.js --open","test":"grunt travis --verbose"},"title":"SIP.js","version":"0.7.7"}
 
 /***/ }),
 /* 161 */
@@ -95954,7 +95954,7 @@ module.exports = (function() {
 
 
 var inherits = __webpack_require__(0).inherits;
-var ParticipantSignaling = __webpack_require__(28);
+var ParticipantSignaling = __webpack_require__(30);
 var LocalTrackPublicationV2 = __webpack_require__(193);
 
 /**
@@ -96280,7 +96280,7 @@ module.exports = LocalTrackPublicationSignaling;
 
 
 var inherits = __webpack_require__(0).inherits;
-var ParticipantSignaling = __webpack_require__(28);
+var ParticipantSignaling = __webpack_require__(30);
 var RoomSignaling = __webpack_require__(55);
 var StateMachine = __webpack_require__(11);
 
@@ -96606,7 +96606,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c0774e3a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-238b96d4", module.exports)
   }
 }
 
@@ -96619,7 +96619,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(199)
 }
-var normalizeComponent = __webpack_require__(37)
+var normalizeComponent = __webpack_require__(20)
 /* script */
 var __vue_script__ = __webpack_require__(201)
 /* template */
@@ -96640,7 +96640,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/scenes/Lobby/index.vue"
+Component.options.__file = "resources\\assets\\js\\scenes\\CreateQuestion\\QuestionForm.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -96649,9 +96649,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-eba5fc7a", Component.options)
+    hotAPI.createRecord("data-v-80186aa4", Component.options)
   } else {
-    hotAPI.reload("data-v-eba5fc7a", Component.options)
+    hotAPI.reload("data-v-80186aa4", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -96672,13 +96672,13 @@ var content = __webpack_require__(200);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(36)("940b36e0", content, false, {});
+var update = __webpack_require__(19)("59c4f172", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-eba5fc7a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-eba5fc7a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-80186aa4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./QuestionForm.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-80186aa4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./QuestionForm.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -96691,12 +96691,12 @@ if(false) {
 /* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(18)(false);
+exports = module.exports = __webpack_require__(12)(false);
 // imports
 
 
 // module
-exports.push([module.i, "\n.beaker {\n  margin-top: 25px;\n  height: 100px;\n}\n.link {\n  text-align: center;\n  background-color: #ffb800;\n  color: white;\n  font-weight: bold;\n  width: 50%;\n  margin: 20px 0px 10px 0px;\n}\n.full-height {\n  background-color: white;\n  background-image: url(\"/images/whitebg.png\");\n}\n.app-toolbar img {\n  background: transparent;\n  margin: 80px auto 0 auto;\n}\n.app-toolbar {\n  background-color: #fff;\n  height: 150px;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n", ""]);
+exports.push([module.i, "\n.full-height {\n  background: url(\"/images/whitebg.png\") no-repeat;\n}\n.app-toolbar {\n  background-color: #fff;\n  height: 150px;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.app-toolbar img {\n  background: transparent;\n  margin: 80px auto 0 auto;\n}\n.question-text {\n  margin-top: 100px;\n}\n.job-wrapper {\n  width: 80%;\n  margin: 30px auto 0 auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.subject-text {\n  width: 90%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  margin: 20px auto 15px auto;\n  margin-left: 30px;\n  /* color: #fff; */\n}\n.job-card {\n  width: 20%;\n  cursor: pointer;\n  border-radius: 5px;\n  margin-right: 2.5%;\n  margin-left: 2.5%;\n  background-color: #fff;\n  -webkit-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n  box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n}\n.submit {\n  width: 90%;\n  margin: 0 auto;\n  text-align: center;\n  background-color: #ffb800;\n  color: #fff;\n  font-weight: bold;\n  width: 100%;\n  margin: 20px 0px 10px 0px;\n}\n.text-field {\n  width: 100%;\n}\n.vue-form {\n  width: 80%;\n  margin: 25px auto 20px auto;\n  color: #000;\n  font-size: 20px;\n  font-weight: bold;\n}\n.input-group--text-field label {\n  /* color: #fff !important; */\n}\n.category-radio {\n  visibility: hidden;\n}\n.active {\n  border: 5px solid #ffb800;\n}\n.full-height {\n  background-color: white;\n  background-image: url(\"/images/whitebg.png\");\n}\n", ""]);
 
 // exports
 
@@ -96707,7 +96707,385 @@ exports.push([module.i, "\n.beaker {\n  margin-top: 25px;\n  height: 100px;\n}\n
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(15);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      loaded: false,
+      subject: "",
+      subjectLine: "",
+      title: ""
+    };
+  },
+
+  mounted: function mounted() {
+    console.log("mounted");
+  },
+
+
+  methods: {
+    science: function science() {
+      this.subject = "science";
+    },
+    tech: function tech() {
+      this.subject = "technology";
+    },
+    engineering: function engineering() {
+      this.subject = "engineering";
+    },
+    math: function math() {
+      this.subject = "mathematics";
+    },
+    submitQuestion: function submitQuestion() {
+      console.log("hello");
+      axios.post("/question", {
+        subject: this.subject,
+        title: this.title,
+        subjectLine: this.subjectLine,
+        classroom_id: window.user.classroom.id
+      }).then(function (response) {
+        console.log(response);
+        this.$router.push({ path: "/app/lobby" });
+      }).catch(function (error) {
+        alert(error);
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 202 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    [
+      _c("v-toolbar", { staticClass: "app-toolbar" }, [
+        _c("img", {
+          attrs: { src: "/images/seeds-logo.png", alt: "seeds logo" }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "v-container",
+        { attrs: { "grid-list-md": "", "text-xs-center": "" } },
+        [
+          _c(
+            "v-layout",
+            { attrs: { row: "", wrap: "" } },
+            [
+              _c("v-flex", { attrs: { xs12: "" } }, [
+                _c("div", { staticClass: "headline question-text" }, [
+                  _vm._v("I have a question!")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "job-wrapper" },
+                  [
+                    _c("p", { staticClass: "display-1 subject-text" }, [
+                      _vm._v("Choose a subject:")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "job-card",
+                        class: { active: _vm.subject == "science" },
+                        on: { click: _vm.science }
+                      },
+                      [
+                        _c("img", {
+                          attrs: { src: "/images/science.png", alt: "science" }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "job-card",
+                        class: { active: _vm.subject == "technology" },
+                        on: { click: _vm.tech }
+                      },
+                      [
+                        _c("img", {
+                          attrs: {
+                            src: "/images/technology.png",
+                            alt: "technology"
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "job-card",
+                        class: { active: _vm.subject == "engineering" },
+                        on: { click: _vm.engineering }
+                      },
+                      [
+                        _c("img", {
+                          attrs: {
+                            src: "/images/engineering.png",
+                            alt: "engineering"
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "job-card",
+                        class: { active: _vm.subject == "mathematics" },
+                        on: { click: _vm.math }
+                      },
+                      [
+                        _c("img", {
+                          attrs: { src: "/images/math.png", alt: "mathematics" }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-form",
+                      {
+                        staticClass: "vue-form",
+                        model: {
+                          value: _vm.valid,
+                          callback: function($$v) {
+                            _vm.valid = $$v
+                          },
+                          expression: "valid"
+                        }
+                      },
+                      [
+                        _c("v-text-field", {
+                          attrs: { label: "Subject", required: "" },
+                          model: {
+                            value: _vm.subjectLine,
+                            callback: function($$v) {
+                              _vm.subjectLine = $$v
+                            },
+                            expression: "subjectLine"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-text-field", {
+                          attrs: { label: "Question", required: "" },
+                          model: {
+                            value: _vm.title,
+                            callback: function($$v) {
+                              _vm.title = $$v
+                            },
+                            expression: "title"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "waves-effect waves-light btn submit",
+                        on: {
+                          click: function($event) {
+                            if (
+                              !("button" in $event) &&
+                              _vm._k(
+                                $event.keyCode,
+                                "preventDefault",
+                                undefined,
+                                $event.key
+                              )
+                            ) {
+                              return null
+                            }
+                            _vm.submitQuestion($event)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          " \n                          Submit\n          "
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-80186aa4", module.exports)
+  }
+}
+
+/***/ }),
+/* 203 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(204)
+}
+var normalizeComponent = __webpack_require__(20)
+/* script */
+var __vue_script__ = __webpack_require__(206)
+/* template */
+var __vue_template__ = __webpack_require__(207)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\scenes\\Lobby\\index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c2dd0514", Component.options)
+  } else {
+    hotAPI.reload("data-v-c2dd0514", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 204 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(205);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(19)("5b176384", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c2dd0514\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c2dd0514\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 205 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(12)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.beaker {\n  margin-top: 25px;\n  height: 100px;\n}\n.link {\n  text-align: center;\n  background-color: #ffb800;\n  color: white;\n  font-weight: bold;\n  width: 50%;\n  margin: 20px 0px 10px 0px;\n}\n.full-height {\n  background-color: white;\n  background-image: url(\"/images/whitebg.png\");\n}\n.app-toolbar img {\n  background: transparent;\n  margin: 80px auto 0 auto;\n}\n.app-toolbar {\n  background-color: #fff;\n  height: 150px;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 206 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
@@ -96751,7 +97129,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 202 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -96824,18 +97202,18 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-eba5fc7a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-c2dd0514", module.exports)
   }
 }
 
 /***/ }),
-/* 203 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(204);
+var content = __webpack_require__(209);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -96843,7 +97221,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(205)(content, options);
+var update = __webpack_require__(210)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -96860,10 +97238,10 @@ if(false) {
 }
 
 /***/ }),
-/* 204 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(18)(false);
+exports = module.exports = __webpack_require__(12)(false);
 // imports
 
 
@@ -96874,7 +97252,7 @@ exports.push([module.i, "/*!\n* Vuetify v1.0.3\n* Forged by John Leider\n* Relea
 
 
 /***/ }),
-/* 205 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -96920,7 +97298,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(206);
+var	fixUrls = __webpack_require__(211);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -97233,7 +97611,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 206 */
+/* 211 */
 /***/ (function(module, exports) {
 
 
@@ -97328,392 +97706,10 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 207 */
+/* 212 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 208 */,
-/* 209 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(214)
-}
-var normalizeComponent = __webpack_require__(37)
-/* script */
-var __vue_script__ = __webpack_require__(212)
-/* template */
-var __vue_template__ = __webpack_require__(216)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/scenes/CreateQuestion/QuestionForm.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1476ab41", Component.options)
-  } else {
-    hotAPI.reload("data-v-1476ab41", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 210 */,
-/* 211 */,
-/* 212 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      loaded: false,
-      subject: "",
-      subjectLine: "",
-      title: ""
-    };
-  },
-
-  mounted: function mounted() {
-    console.log("mounted");
-  },
-
-
-  methods: {
-    science: function science() {
-      this.subject = "science";
-    },
-    tech: function tech() {
-      this.subject = "technology";
-    },
-    engineering: function engineering() {
-      this.subject = "engineering";
-    },
-    math: function math() {
-      this.subject = "mathematics";
-    },
-    submitQuestion: function submitQuestion() {
-      console.log("hello");
-      axios.post("/question", {
-        subject: this.subject,
-        title: this.title,
-        subjectLine: this.subjectLine,
-        classroom_id: window.user.classroom.id
-      }).then(function (response) {
-        console.log(response);
-        //   this.$router.push({ path: "/app/lobby" });
-      }).catch(function (error) {
-        alert(error);
-      });
-    }
-  }
-});
-
-/***/ }),
-/* 213 */,
-/* 214 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(215);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(36)("86245af0", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1476ab41\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./QuestionForm.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1476ab41\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./QuestionForm.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 215 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(18)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.full-height {\n  background: url(\"/images/whitebg.png\") no-repeat;\n}\n.app-toolbar {\n  background-color: #fff;\n  height: 150px;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.app-toolbar img {\n  background: transparent;\n  margin: 80px auto 0 auto;\n}\n.question-text {\n  margin-top: 100px;\n}\n.job-wrapper {\n  width: 80%;\n  margin: 30px auto 0 auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.subject-text {\n  width: 90%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  margin: 20px auto 15px auto;\n  margin-left: 30px;\n  /* color: #fff; */\n}\n.job-card {\n  width: 20%;\n  cursor: pointer;\n  border-radius: 5px;\n  margin-right: 2.5%;\n  margin-left: 2.5%;\n  background-color: #fff;\n  -webkit-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n  box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n}\n.submit {\n  width: 90%;\n  margin: 0 auto;\n  text-align: center;\n  background-color: #ffb800;\n  color: #fff;\n  font-weight: bold;\n  width: 100%;\n  margin: 20px 0px 10px 0px;\n}\n.text-field {\n  width: 100%;\n}\n.vue-form {\n  width: 80%;\n  margin: 25px auto 20px auto;\n  color: #000;\n  font-size: 20px;\n  font-weight: bold;\n}\n.input-group--text-field label {\n  /* color: #fff !important; */\n}\n.category-radio {\n  visibility: hidden;\n}\n.active {\n  border: 5px solid #ffb800;\n}\n.full-height {\n  background-color: white;\n  background-image: url(\"/images/whitebg.png\");\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 216 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    [
-      _c("v-toolbar", { staticClass: "app-toolbar" }, [
-        _c("img", {
-          attrs: { src: "/images/seeds-logo.png", alt: "seeds logo" }
-        })
-      ]),
-      _vm._v(" "),
-      _c(
-        "v-container",
-        { attrs: { "grid-list-md": "", "text-xs-center": "" } },
-        [
-          _c(
-            "v-layout",
-            { attrs: { row: "", wrap: "" } },
-            [
-              _c("v-flex", { attrs: { xs12: "" } }, [
-                _c("div", { staticClass: "headline question-text" }, [
-                  _vm._v("I have a question!")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "job-wrapper" },
-                  [
-                    _c("p", { staticClass: "display-1 subject-text" }, [
-                      _vm._v("Choose a subject:")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "job-card",
-                        class: { active: _vm.subject == "science" },
-                        on: { click: _vm.science }
-                      },
-                      [
-                        _c("img", {
-                          attrs: { src: "/images/science.png", alt: "science" }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "job-card",
-                        class: { active: _vm.subject == "technology" },
-                        on: { click: _vm.tech }
-                      },
-                      [
-                        _c("img", {
-                          attrs: {
-                            src: "/images/technology.png",
-                            alt: "technology"
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "job-card",
-                        class: { active: _vm.subject == "engineering" },
-                        on: { click: _vm.engineering }
-                      },
-                      [
-                        _c("img", {
-                          attrs: {
-                            src: "/images/engineering.png",
-                            alt: "engineering"
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "job-card",
-                        class: { active: _vm.subject == "mathematics" },
-                        on: { click: _vm.math }
-                      },
-                      [
-                        _c("img", {
-                          attrs: { src: "/images/math.png", alt: "mathematics" }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-form",
-                      {
-                        staticClass: "vue-form",
-                        model: {
-                          value: _vm.valid,
-                          callback: function($$v) {
-                            _vm.valid = $$v
-                          },
-                          expression: "valid"
-                        }
-                      },
-                      [
-                        _c("v-text-field", {
-                          attrs: { label: "Subject", required: "" },
-                          model: {
-                            value: _vm.subjectLine,
-                            callback: function($$v) {
-                              _vm.subjectLine = $$v
-                            },
-                            expression: "subjectLine"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("v-text-field", {
-                          attrs: { label: "Question", required: "" },
-                          model: {
-                            value: _vm.title,
-                            callback: function($$v) {
-                              _vm.title = $$v
-                            },
-                            expression: "title"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "waves-effect waves-light btn submit",
-                        on: {
-                          click: function($event) {
-                            if (
-                              !("button" in $event) &&
-                              _vm._k(
-                                $event.keyCode,
-                                "preventDefault",
-                                undefined,
-                                $event.key
-                              )
-                            ) {
-                              return null
-                            }
-                            _vm.submitQuestion($event)
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          " \n                          Submit\n          "
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                )
-              ])
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1476ab41", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);
