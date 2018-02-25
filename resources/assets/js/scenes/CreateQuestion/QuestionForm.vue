@@ -98,7 +98,7 @@ export default {
   background: url("/images/whitebg.png") no-repeat;
 }
 .app-toolbar {
-  background-color: #fff;
+  background-color: #fbfbfb;
   height: 150px;
   position: absolute;
   top: 0;
