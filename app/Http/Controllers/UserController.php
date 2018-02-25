@@ -4,38 +4,58 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
+use App\User;
+use App\Professional;
+use App\Classroom;
+use App\Job;
 
 class UserController extends Controller
 {
     public function professional(Request $request) {
-        return $request;
         $request->flash();
 		$validator = Validator::make($request->all(),[
 			'name' => 'required',
-			'bio' => 'required',
-			'categories' => 'required',
-		]);
+			'about' => 'required',
+			'jobs' => 'required',
+        ]);
+
+        $jobs = $request->jobs;
+
 
 
 		if ($validator->fails()) {
 			return response()->json(['errors' => $validator->errors()]);
 		} else {   
-            return 'professional';
-			// check if we have this client/email in our DB already so that we don't create a duplicate
-			// if (clients::where('email', $request->email)->exists()) {
-			// 	$client = clients::where('email', $request->email)->first();
-			// 	$client->update($request->all());
-			// } else {
-			// 	//make inserts into the database
-			// }
+            $user = new User;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            
+            $user->save();
+
+            $professional = new Professional;
+            $professional->bio = $request->about;
+            $professional->user_id = $user->id;
+    
+            $professional->save();
+
+            // foreach ($jobs as $job) {
+            //     $job = new Job;
+            //     $job->name = $job->name;
+            //     $job->save();
+            // }
+            $jobIds = Job::wherIn('name', $jobs)->get()->pluck('id');
+            $professional->jobs()->attach($jobIds);
+            return 'OK';
     }
 }
 public function classroom(Request $request) {
-    return $request;
     $request->flash();
     $validator = Validator::make($request->all(),[
         'name' => 'required',
         'school' => 'required',
+        'email' => 'required',
+        'password' => 'required',
         'city' => 'required',
     ]);
 
@@ -43,12 +63,21 @@ public function classroom(Request $request) {
     if ($validator->fails()) {
         return response()->json(['errors' => $validator->errors()]);
     } else {    
-        $user = new App\User;
+        $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-
+        
         $user->save();
+
+        $classroom = new Classroom;
+        $classroom->school = $request->school;
+        $classroom->city = $request->city;
+        $classroom->user_id = $user->id;
+
+        $classroom->save();
+
+        return 'OK';
     }
 }
 
