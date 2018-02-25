@@ -28,7 +28,7 @@ class ApiController extends Controller
         $apiKeySid = env('TWILIO_API_KEY');
         $apiKeySecret = env('TWILIO_API_SECRET');
 
-        $identity = 'yosn-test';
+        $identity = 'yosdfn-test';
 
         // Create an Access Token
         $token = new AccessToken(
@@ -45,6 +45,22 @@ class ApiController extends Controller
         $token->addGrant($grant);
 
         return $token->toJWT();
+    }
+
+    public function sms() {
+        $sid =  env('TWILIO_ACCOUNT_SID');
+        $token = env('TWILIO_API_KEY');
+        $client = new Client($sid, $token);
+        // return $client;
+
+        $client->messages->create(
+        '+19543041294',
+        array(
+            'from' => '+19542808883',
+            'body' => 'Hey we need your help! Click the link below to answer a question ' .
+                    '[company_name] to a friend? Reply with the number 1 to 10 to this message.',
+        )
+        );
     }
 
     /**

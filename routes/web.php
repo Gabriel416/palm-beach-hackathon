@@ -45,6 +45,7 @@ Route::get('/app/{any}', 'PagesController@index')->where('any', '.*');
 
 // Api Controller
 Route::get('/get_twilio_token', 'ApiController@index');
+Route::get('/send/text', 'ApiController@sms');
 
 Auth::routes();
 
