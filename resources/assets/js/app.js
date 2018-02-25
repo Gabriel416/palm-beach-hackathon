@@ -11,6 +11,7 @@ window.Vue = require('vue');
 import Vuetify from 'vuetify'
 import VueRouter from 'vue-router';
 import VideoRoom from './scenes/VideoRoom/index.vue';
+import Lobby from './scenes/Lobby/index.vue';
 
 //IMPORT VUEX STORE
 // import { store } from './store';
@@ -26,6 +27,7 @@ const uri = '/app';
 
 const routes = [
     { path: `${uri}/video`, component: VideoRoom },
+    { path: `${uri}/lobby`, component: Lobby },
 ];
 
 const router = new VueRouter({
