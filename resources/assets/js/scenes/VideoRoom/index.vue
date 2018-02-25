@@ -47,8 +47,7 @@ export default {
             room.on("participantConnected", function(participant) {
               console.log("A remote Participant connected: ", participant);
 
-              participant.tracks.forEach(track => {
-                console.log(track);
+              participant.on("trackAdded", track => {
                 document
                   .getElementById("remote-media-div")
                   .appendChild(track.attach());

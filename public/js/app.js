@@ -67292,7 +67292,7 @@ exports = module.exports = __webpack_require__(10)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -67721,8 +67721,7 @@ var _require = __webpack_require__(102),
         room.on("participantConnected", function (participant) {
           console.log("A remote Participant connected: ", participant);
 
-          participant.tracks.forEach(function (track) {
-            console.log(track);
+          participant.on("trackAdded", function (track) {
             document.getElementById("remote-media-div").appendChild(track.attach());
           });
         });
