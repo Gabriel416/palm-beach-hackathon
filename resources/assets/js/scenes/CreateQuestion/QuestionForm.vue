@@ -7,8 +7,7 @@
       <v-layout row wrap>
         <v-flex xs12>
             <div class="headline question-text">I have a question!</div>
-            <!-- <div class="display-2"></div> -->
-            <form method="POST" action="/ask/question">
+
             <div class="job-wrapper">
                 <p class="display-1 subject-text">Choose a subject:</p>
                 <div class="job-card" @click="science" v-bind:class="{ active: subject == 'science'}">
@@ -35,11 +34,10 @@
                 required
                 ></v-text-field>
             </v-form>
-             <button type="submit" class="waves-effect waves-light btn submit" @click="submitQuestion(event)"> 
+             <button  class="waves-effect waves-light btn submit" @click.preventDefault="submitQuestion"> 
                             Submit
             </button>
             </div>
-            </form>
         </v-flex>
       </v-layout>
     </v-container>
@@ -74,18 +72,18 @@ export default {
     math() {
       this.subject = "mathematics";
     },
-    submitQuestion(event) {
-      event.preventDefault();
+    submitQuestion() {
       console.log("hello");
       axios
         .post("/question", {
-          subject,
-          title,
-          subjectLine
+          subject: this.subject,
+          title: this.title,
+          subjectLine: this.subjectLine,
+          classroom_id: window.user.classroom.id
         })
         .then(function(response) {
           console.log(response);
-          this.$router.push({ path: "/app/lobby" });
+          //   this.$router.push({ path: "/app/lobby" });
         })
         .catch(function(error) {
           alert(error);

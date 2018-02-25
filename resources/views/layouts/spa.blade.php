@@ -50,6 +50,8 @@
 
     <!-- Scripts -->
     @yield('scripts')
+
+    @include ('footer')
 </body>
 </html>
 Ï
