@@ -28,7 +28,7 @@ Route::post('/classroom', 'UserController@classroom');
 Route::post('/professional', 'UserController@professional');
 
 // Question Controller
-Route::post('/create', 'QuestionsController@create');
+Route::post('/question', 'QuestionsController@create');
 
 
 // Pages Controller

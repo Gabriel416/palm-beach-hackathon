@@ -18,15 +18,19 @@ class QuestionsController extends Controller
         $classroom = $q->classroom;
         $email = $classroom->email;
 
+        $subject = $request->subject;
+
         $profEmails = Professional::get();
 
         foreach($profEmails as $email) {
-            Mail::send('emails.accept', ['name' => $classroom->name, 'question' => $q->title, 'questionLink' => '/app/video'], function ($message) use ($email)
+            Mail::send('emails.accept', ['name' => $classroom->name, 'question' => $q->title, 'questionLink' => '/app/video'], function ($message) use ($email, $subject)
             {
                 $message->from('gabe@nebularagency.com');
                 $message->to($email);
-                $message->subject("I need your help!");       
+                $message->subject($subject);       
             });
         }
+
+        return 'ok';
     }
 }
