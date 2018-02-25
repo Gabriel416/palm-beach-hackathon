@@ -69,8 +69,7 @@
     @section('content')
         
         <div class="row headliner">
-            <h1 class="title">seeds</h1>
-            <h2 class="subtitle">From seeds of knowledge...they STEM</h2>
+            <img src="/images/longlogo.png">
         </div>
 
         <div class="row card-row">
