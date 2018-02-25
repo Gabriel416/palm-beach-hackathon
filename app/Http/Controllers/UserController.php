@@ -8,6 +8,7 @@ use App\User;
 use App\Professional;
 use App\Classroom;
 use App\Job;
+use Auth;
 
 class UserController extends Controller
 {
@@ -56,7 +57,7 @@ public function classroom(Request $request) {
         'school' => 'required',
         'email' => 'required',
         'password' => 'required',
-        'city' => 'required',
+        'city' => 'nullable',
     ]);
 
 
@@ -76,6 +77,8 @@ public function classroom(Request $request) {
         $classroom->user_id = $user->id;
 
         $classroom->save();
+
+        Auth::login($user);
 
         return 'OK';
     }
