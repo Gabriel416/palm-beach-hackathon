@@ -15,9 +15,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
 
     <style>
@@ -26,18 +26,23 @@
             color: #636b6f;
             font-family: 'Raleway', sans-serif;
             font-weight: 100;
-            height: 100vh;
+            height: 100%;
+            /* width: 100%; */
             margin: 0;
         }
 
         .full-height {
-            height: 100vh;
+            min-height: 100%;
             background-color: black;
             background-image: url("/images/Rectangle.png");
             background-size: cover;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        #app {
+            height: 100%;
         }
     </style>
     @yield('styles')

@@ -27,6 +27,10 @@ Route::get("/classroom/login", function() {
     return view('auth/login');
 });
 
+Route::get('/register/completed', function () {
+    return view('auth/completed');
+});
+
 //USER CONTROLLER
 Route::post('/classroom', 'UserController@classroom');
 Route::post('/professional', 'UserController@professional');

@@ -21,10 +21,11 @@ class QuestionsController extends Controller
 
         $subject = $request->subject;
 
-        $profEmails = User::has('professional')->get()->pluck('email');
+        $profs = User::has('professional')->get();
 
-        foreach($profEmails as $email) {
-            Mail::send('emails.accept', ['name' => $classroom->name, 'question' => $q->title, 'questionLink' => '/app/video'], function ($message) use ($email, $subject)
+        foreach($profs as $prof) {
+            $email = $prof->email;
+            Mail::send('emails.accept', ['name' => $prof->name, 'question' => $q->title, 'questionLink' => '/app/video?name=' . $prof->name], function ($message) use ($email, $subject)
             {
                 $message->from('gabe@nebularagency.com');
                 $message->to($email);
