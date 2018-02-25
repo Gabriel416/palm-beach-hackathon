@@ -33,7 +33,7 @@ export default {
       .get("/get_twilio_token")
       .then(res => {
         console.log(res);
-        Twilio.Video.connect(res.data).then(
+        Twilio.Video.connect(res.data, { name: "my new room" }).then(
           function(room) {
             console.log("Successfully joined a Room: ", room);
 

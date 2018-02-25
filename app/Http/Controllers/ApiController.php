@@ -11,6 +11,7 @@ use Twilio\Rest\Client;
 use Twilio\Jwt\AccessToken;
 use Twilio\Jwt\Grants\VideoGrant;
 use Validator;
+use Mail;
 
 class ApiController extends Controller
 {
@@ -51,9 +52,14 @@ class ApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function send_email() {
+        Mail::send('emails.accept', ['name' => 'Gabriel', 'question' => 'What is the largest planet'], function ($message) use ($email)
+        {
+            $message->from('gabe@nebularagency.com');
+            $message->to('gabe@nebularagency.com');
+            $message->subject("I need your help!");
+
+        });
     }
 
     /**
