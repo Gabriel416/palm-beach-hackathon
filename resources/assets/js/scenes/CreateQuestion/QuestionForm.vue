@@ -83,7 +83,7 @@ export default {
         })
         .then(function(response) {
           console.log(response);
-          //   this.$router.push({ path: "/app/lobby" });
+          this.$router.push({ path: "/app/lobby" });
         })
         .catch(function(error) {
           alert(error);
@@ -98,7 +98,7 @@ export default {
   background: url("/images/whitebg.png") no-repeat;
 }
 .app-toolbar {
-  background-color: #fff;
+  background-color: #fbfbfb;
   height: 150px;
   position: absolute;
   top: 0;
