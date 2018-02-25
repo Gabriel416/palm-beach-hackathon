@@ -1,7 +1,7 @@
 <template lang="html">
   <section>
     <v-toolbar class="app-toolbar">
-        <img src="/images/seeds-logo.png" alt="seeds logo">
+        <img src="/images/white-seeds-logo.png" alt="seeds logo">
   </v-toolbar>
     <v-container grid-list-md text-xs-center>
       <v-layout row wrap>

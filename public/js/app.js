@@ -96585,7 +96585,7 @@ exports = module.exports = __webpack_require__(18)(false);
 
 
 // module
-exports.push([module.i, "\n.connecting {\n  color: #fff;\n}\n.beaker {\n  margin-top: 25px;\n  height: 100px;\n}\n.link {\n  text-align: center;\n  background-color: #ffb800;\n  color: white;\n  font-weight: bold;\n  width: 50%;\n  margin: 20px 0px 10px 0px;\n}\n", ""]);
+exports.push([module.i, "\n.beaker {\n  margin-top: 25px;\n  height: 100px;\n}\n.link {\n  text-align: center;\n  background-color: #ffb800;\n  color: white;\n  font-weight: bold;\n  width: 50%;\n  margin: 20px 0px 10px 0px;\n}\n.full-height {\n  background-color: white;\n  background-image: url(\"/images/whitebg.png\");\n}\n.app-toolbar img {\n  background: transparent;\n  margin: 80px auto 0 auto;\n}\n.app-toolbar {\n  background-color: #fff;\n  height: 150px;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n", ""]);
 
 // exports
 
@@ -96598,6 +96598,9 @@ exports.push([module.i, "\n.connecting {\n  color: #fff;\n}\n.beaker {\n  margin
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+//
+//
+//
 //
 //
 //
@@ -96647,6 +96650,12 @@ var render = function() {
   return _c(
     "section",
     [
+      _c("v-toolbar", { staticClass: "app-toolbar" }, [
+        _c("img", {
+          attrs: { src: "/images/seeds-logo.png", alt: "seeds logo" }
+        })
+      ]),
+      _vm._v(" "),
       _c(
         "v-container",
         { attrs: { "grid-list-md": "", "text-xs-center": "" } },
@@ -96658,7 +96667,7 @@ var render = function() {
               _c("v-flex", { attrs: { xs12: "" } }, [
                 !_vm.showReadyButton
                   ? _c("div", [
-                      _c("div", { staticClass: "headline connecting" }, [
+                      _c("div", { staticClass: "headline" }, [
                         _vm._v("Connecting you to a STEM Professional...")
                       ]),
                       _vm._v(" "),
@@ -97395,7 +97404,7 @@ var render = function() {
     [
       _c("v-toolbar", { staticClass: "app-toolbar" }, [
         _c("img", {
-          attrs: { src: "/images/seeds-logo.png", alt: "seeds logo" }
+          attrs: { src: "/images/white-seeds-logo.png", alt: "seeds logo" }
         })
       ]),
       _vm._v(" "),

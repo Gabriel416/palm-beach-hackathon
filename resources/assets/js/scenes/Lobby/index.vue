@@ -1,10 +1,13 @@
 <template lang="html">
   <section>
+    <v-toolbar class="app-toolbar">
+    <img src="/images/seeds-logo.png" alt="seeds logo">
+  </v-toolbar>
     <v-container grid-list-md text-xs-center>
       <v-layout row wrap>
         <v-flex xs12>
             <div v-if="!showReadyButton">
-                <div class="headline connecting">Connecting you to a STEM Professional...</div>
+                <div class="headline">Connecting you to a STEM Professional...</div>
                 <img class="beaker" src="/images/beakerloader.gif" />
             </div>
             <div v-else>
@@ -29,15 +32,11 @@ export default {
 
   mounted() {
     setTimeout(() => (this.showReadyButton = true), 3793);
-  },
+  }
 };
 </script>
 
   <style>
-.connecting {
-  color: #fff;
-}
-
 .beaker {
   margin-top: 25px;
   height: 100px;
@@ -50,5 +49,23 @@ export default {
   font-weight: bold;
   width: 50%;
   margin: 20px 0px 10px 0px;
+}
+
+.full-height {
+  background-color: white;
+  background-image: url("/images/whitebg.png");
+}
+
+.app-toolbar img {
+  background: transparent;
+  margin: 80px auto 0 auto;
+}
+
+.app-toolbar {
+  background-color: #fff;
+  height: 150px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
