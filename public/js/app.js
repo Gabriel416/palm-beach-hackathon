@@ -67710,7 +67710,7 @@ var _require = __webpack_require__(102),
   mounted: function mounted() {
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/get_twilio_token").then(function (res) {
       console.log(res);
-      Twilio.Video.connect(res.data, { name: "my-new-room" }).then(function (room) {
+      Twilio.Video.connect(res.data).then(function (room) {
         console.log("Successfully joined a Room: ", room);
 
         room.localParticipant.tracks.forEach(function (track) {
