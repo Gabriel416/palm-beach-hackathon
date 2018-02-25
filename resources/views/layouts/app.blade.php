@@ -53,9 +53,5 @@
 
     <!-- Scripts -->
     @yield('scripts')
-<<<<<<< HEAD
-    <script src="{{ asset('js/app.js') }}"></script>
-=======
->>>>>>> 6d997672c79e337084a6217183ac54a0a3fe2f97
 </body>
 </html>

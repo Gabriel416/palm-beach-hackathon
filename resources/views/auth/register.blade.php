@@ -68,7 +68,7 @@
         </div>
         
         <div class="card-body">
-            <h1>Sigh up as STEM Professional!</h1>
+            <h1>Sign up as STEM Professional!</h1>
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
