@@ -11,7 +11,7 @@ class Job extends Model
     ];
 
     public function professionals() {
-        return $this->hasMany('App\Professional');
+        return $this->belongsToMany('App\Professional');
     }
 
     public function categories()
