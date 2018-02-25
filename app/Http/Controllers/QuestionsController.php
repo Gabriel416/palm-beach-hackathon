@@ -23,7 +23,16 @@ class QuestionsController extends Controller
 
         $profs = User::has('professional')->get();
 
-        foreach($profs as $prof) {
+        // foreach($profs as $prof) {
+        //     $email = $prof->email;
+        //     Mail::send('emails.accept', ['name' => $prof->name, 'question' => $q->title, 'questionLink' => '/app/video?name=' . $prof->name], function ($message) use ($email, $subject)
+        //     {
+        //         $message->from('gabe@nebularagency.com');
+        //         $message->to($email);
+        //         $message->subject($subject);       
+        //     });
+        // }
+            $prof = User::where('email', 'gabe@nebularagency.com')->first();
             $email = $prof->email;
             Mail::send('emails.accept', ['name' => $prof->name, 'question' => $q->title, 'questionLink' => '/app/video?name=' . $prof->name], function ($message) use ($email, $subject)
             {
