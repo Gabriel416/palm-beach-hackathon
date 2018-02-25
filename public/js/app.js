@@ -97309,7 +97309,7 @@ exports = module.exports = __webpack_require__(18)(false);
 
 
 // module
-exports.push([module.i, "\n.full-height[data-v-1476ab41] {\n  background: url(\"/images/whitebg.png\") no-repeat;\n}\n.app-toolbar[data-v-1476ab41] {\n  background-color: #fff;\n  height: 150px;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.app-toolbar img[data-v-1476ab41] {\n  background: transparent;\n  margin: 80px auto 0 auto;\n}\n.question-text[data-v-1476ab41] {\n  color: #fff;\n}\n.job-wrapper[data-v-1476ab41] {\n  width: 80%;\n  margin: 30px auto 0 auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.subject-text[data-v-1476ab41] {\n  width: 90%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  margin: 20px auto 15px auto;\n  margin-left: 30px;\n  color: #fff;\n}\n.job-card[data-v-1476ab41] {\n  width: 20%;\n  border-radius: 5px;\n  margin-right: 2.5%;\n  margin-left: 2.5%;\n  background-color: #fff;\n  -webkit-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n  box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n}\n.submit[data-v-1476ab41] {\n  width: 90%;\n  margin: 0 auto;\n  text-align: center;\n  background-color: #ffb800;\n  color: #fff;\n  font-weight: bold;\n  width: 100%;\n  margin: 20px 0px 10px 0px;\n}\n.text-field[data-v-1476ab41] {\n  width: 100%;\n}\n.vue-form[data-v-1476ab41] {\n  width: 80%;\n  margin: 25px auto 20px auto;\n  color: #000;\n  font-size: 20px;\n  font-weight: bold;\n}\n.input-group--text-field label[data-v-1476ab41] {\n  color: #fff !important;\n}\n", ""]);
+exports.push([module.i, "\n.full-height[data-v-1476ab41] {\n  background: url(\"/images/whitebg.png\") no-repeat;\n}\n.app-toolbar[data-v-1476ab41] {\n  background-color: #fff;\n  height: 150px;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.app-toolbar img[data-v-1476ab41] {\n  background: transparent;\n  margin: 80px auto 0 auto;\n}\ngit .question-text[data-v-1476ab41] {\n  color: #fff;\n}\n.job-wrapper[data-v-1476ab41] {\n  width: 80%;\n  margin: 30px auto 0 auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.subject-text[data-v-1476ab41] {\n  width: 90%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  margin: 20px auto 15px auto;\n  margin-left: 30px;\n  color: #fff;\n}\n.job-card[data-v-1476ab41] {\n  width: 20%;\n  cursor: pointer;\n  border-radius: 5px;\n  margin-right: 2.5%;\n  margin-left: 2.5%;\n  background-color: #fff;\n  -webkit-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n  box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.32);\n}\n.submit[data-v-1476ab41] {\n  width: 90%;\n  margin: 0 auto;\n  text-align: center;\n  background-color: #ffb800;\n  color: #fff;\n  font-weight: bold;\n  width: 100%;\n  margin: 20px 0px 10px 0px;\n}\n.text-field[data-v-1476ab41] {\n  width: 100%;\n}\n.vue-form[data-v-1476ab41] {\n  width: 80%;\n  margin: 25px auto 20px auto;\n  color: #000;\n  font-size: 20px;\n  font-weight: bold;\n}\n.input-group--text-field label[data-v-1476ab41] {\n  color: #fff !important;\n}\n.category-radio[data-v-1476ab41] {\n  visibility: hidden;\n}\n.active[data-v-1476ab41] {\n  border: 5px solid #ffb800;\n}\n", ""]);
 
 // exports
 
@@ -97374,7 +97374,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       loaded: false,
       subject: "",
-      question: ""
+      subjectLine: "",
+      title: ""
     };
   },
 
@@ -97384,9 +97385,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   methods: {
+    science: function science() {
+      this.subject = "science";
+    },
+    tech: function tech() {
+      this.subject = "technology";
+    },
+    engineering: function engineering() {
+      this.subject = "engineering";
+    },
+    math: function math() {
+      this.subject = "mathematics";
+    },
     submitQuestion: function submitQuestion(event) {
       event.preventDefault();
       console.log("hello");
+      axios.post("/question", {
+        subject: subject,
+        title: title,
+        subjectLine: subjectLine
+      }).then(function (response) {
+        console.log(response);
+        this.$router.push({ path: "/app/lobby" });
+      }).catch(function (error) {
+        alert(error);
+      });
     }
   }
 });
@@ -97433,38 +97456,73 @@ var render = function() {
                           _vm._v("Choose a subject:")
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "job-card" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "/images/science.png",
-                              alt: "science"
-                            }
-                          })
-                        ]),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "job-card",
+                            class: { active: _vm.subject == "science" },
+                            on: { click: _vm.science }
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src: "/images/science.png",
+                                alt: "science"
+                              }
+                            })
+                          ]
+                        ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "job-card" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "/images/technology.png",
-                              alt: "science"
-                            }
-                          })
-                        ]),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "job-card",
+                            class: { active: _vm.subject == "technology" },
+                            on: { click: _vm.tech }
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src: "/images/technology.png",
+                                alt: "technology"
+                              }
+                            })
+                          ]
+                        ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "job-card" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "/images/engineering.png",
-                              alt: "science"
-                            }
-                          })
-                        ]),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "job-card",
+                            class: { active: _vm.subject == "engineering" },
+                            on: { click: _vm.engineering }
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src: "/images/engineering.png",
+                                alt: "engineering"
+                              }
+                            })
+                          ]
+                        ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "job-card" }, [
-                          _c("img", {
-                            attrs: { src: "/images/math.png", alt: "science" }
-                          })
-                        ]),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "job-card",
+                            class: { active: _vm.subject == "mathematics" },
+                            on: { click: _vm.math }
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src: "/images/math.png",
+                                alt: "mathematics"
+                              }
+                            })
+                          ]
+                        ),
                         _vm._v(" "),
                         _c(
                           "v-form",
@@ -97482,22 +97540,22 @@ var render = function() {
                             _c("v-text-field", {
                               attrs: { label: "Subject", required: "" },
                               model: {
-                                value: _vm.subject,
+                                value: _vm.subjectLine,
                                 callback: function($$v) {
-                                  _vm.subject = $$v
+                                  _vm.subjectLine = $$v
                                 },
-                                expression: "subject"
+                                expression: "subjectLine"
                               }
                             }),
                             _vm._v(" "),
                             _c("v-text-field", {
                               attrs: { label: "Question", required: "" },
                               model: {
-                                value: _vm.question,
+                                value: _vm.title,
                                 callback: function($$v) {
-                                  _vm.question = $$v
+                                  _vm.title = $$v
                                 },
-                                expression: "question"
+                                expression: "title"
                               }
                             })
                           ],
